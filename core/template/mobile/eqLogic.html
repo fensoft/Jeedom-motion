@@ -1,0 +1,69 @@
+<div class="eqLogic eqLogic-widget" data-eqLogic_id="#id#" data-version="mobile" style="padding-top : 3px;background-color: #background_color#;#style#;" data-first="0">
+	<center>#name#</center>
+	<center>
+		<a href="#popupCameraZoom#id#" data-rel="popup" data-position-to="window" data-transition="none" class="directDisplay">
+			<img class="ImgVideoFlux" style="width:90%;display:block;margin-bottom : 5px;" src="plugins/motion/core/template/icones/no-image-blanc.png"/>
+		</a>
+	</center>
+	<div data-role="popup" id="popupCameraZoom#id#" data-eqLogic_id="#id#">
+		<div data-role="header">
+			<h1 class='nd-title'>#name#</h1>
+			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		</div>
+		<div data-role="content">
+			<br/>
+			<center>
+				<div class="display" style="margin-left : auto;margin-right : auto;width:auto;">
+					<img class="ImgVideoFlux" style="width:90%;display:block;margin-bottom : 5px;" src="plugins/motion/core/template/icones/no-image-blanc.png"/>
+				</div>
+			</center>
+			<center style="margin-top : 5px;">
+
+			</center>
+			<br/>
+		</div>
+	</div>
+	<script>
+	$('.eqLogic[data-eqLogic_id=#id#]').height(deviceInfo.bSize  * (3/4) * 1.2);
+	function refreshImgCam#id#(){	
+			$.ajax({// fonction permettant de faire de l'ajax
+				type: "POST", // methode de transmission des données au fichier php
+				url: "plugins/motion/core/ajax/motion.ajax.php", // url du fichier php
+				data: {
+					action: "RefreshFlux",
+					cameraId: "#id#",
+				},
+				dataType: 'json',
+				global: false,
+				error: function(request, status, error) {
+					handleAjaxError(request, status, error);
+				},
+				success: function(data) { // si l'appel a bien fonctionné
+					if (data.state != 'ok') {
+						$('#div_alert').showAlert({message: data.result, level: 'danger'});
+						return;
+					}
+					if(!data.result){
+						$(".eqLogic[data-eqLogic_id=#id#] .ImgVideoFlux").attr('src','plugins/motion/core/template/icones/no-image-blanc.png');
+					}
+					else {
+						var url = data.result;
+						if(url.indexOf('?') > 0){
+							url += '&t='+(new Date()).getTime();
+						}else{
+							url += '?t='+(new Date()).getTime();
+						}
+                    		$(".eqLogic[data-eqLogic_id=#id#] .ImgVideoFlux ").attr('src',url);
+							 if($('.eqLogic[data-eqLogic_id=#id#] .directDisplay').html() != undefined)
+							   timeoutCamera#id# = setTimeout(refreshImgCam#id#, #refreshDelay#);
+					}
+				}
+			});
+		}
+
+	 if (typeof timeoutCamera#id# !== "undefined") {
+	  clearTimeout(timeoutCamera#id#);
+	}
+	refreshImgCam#id#();
+</script>
+</div>
