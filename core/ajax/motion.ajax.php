@@ -35,23 +35,7 @@ try {
     }
 	if (init('action') == 'SearchUSBCamera') {
 		$USBCamera=array();
-		switch (init('cameraAnalyse'))
-		{
-			case 'local':
-				$USB=motion::getUsbMapping();
-			break;
-			case 'camera':	
-			break;
-			default:
-				/*$jeeNetwork=jeeNetwork::byId(init('cameraAnalyse'));
-				$jsonrpc = $jeeNetwork->getJsonRpc();
-				if (!$jsonrpc->sendRequest('SearchUSBCamera', array('plugin' => 'motion'))) {
-					throw new Exception($jsonrpc->getError());//, $jsonrpc->getErrorCode());
-				}
-				$USB=$jsonrpc->getResult();*/
-			break;
-		}
-		foreach ($USB as $name => $value) {
+		foreach (motion::getUsbMapping() as $name => $value) {
 			$USBCamera[]=array('name'=>$name,'value'=>$value);
 		}
 		ajax::success($USBCamera);
