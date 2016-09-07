@@ -347,6 +347,7 @@ class motion extends eqLogic {
 		}
 	}
 	private static function WriteThread($Camera,$file){
+		log::add('motion','debug','Mise a jours du fichier: '.$file);	
 		exec('sudo chmod 777 -R /etc/motion/');
 		if($fp = fopen($file,"w+")){
 			fputs($fp, 'text_left '.urlencode($Camera->getName()));
@@ -433,7 +434,6 @@ class motion extends eqLogic {
 			$Camera->save();
 			break;
 		}
-		log::add('motion','debug','Mise a jours du fichier: '.$file);	
 		self::WriteThread($Camera,$file);
 		self::UpdateMotionConf();
 		$Host=config::byKey('Host', 'motion');
