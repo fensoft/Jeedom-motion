@@ -346,7 +346,6 @@ class motion extends eqLogic {
 	}
 	private static function WriteThread($Camera,$file){
 		exec('sudo chmod 777 -R /etc/motion/');
-		log::add('motion','debug', 'Création du fichier de configuration thread'.$Camera->getId().'.conf');
 		if($fp = fopen($file,"w+")){
 			fputs($fp, 'text_left '.urlencode($Camera->getName()));
 			fputs($fp, "\n");
@@ -423,7 +422,7 @@ class motion extends eqLogic {
 	}
 	public static function NewThread($Camera) {
 		$file=$Camera->getLogicalId();
-		if($file=''){
+		if($file==''){
 			if(count(eqLogic::byLogicalId('/etc/motion/motion.conf','motion',true))==0)
 				$file='/etc/motion/motion.conf';
 			else
@@ -431,7 +430,7 @@ class motion extends eqLogic {
 			$Camera->setLogicalId($file);
 			$Camera->save();
 		}
-		log::add('motion','debug','Mise a jours du fichier'.$file);	
+		log::add('motion','debug','Mise a jours du fichier: '.$file);	
 		self::WriteThread($Camera,$file);
 		self::UpdateMotionConf();
 		$Host=config::byKey('Host', 'motion');
