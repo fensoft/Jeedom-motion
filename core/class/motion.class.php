@@ -421,10 +421,13 @@ class motion extends eqLogic {
 		}
 	}
 	public static function NewThread($Camera) {
-		if(count(eqLogic::byType('motion'))==0){
-			$file='/etc/motion/motion.conf';
-		}else{
-			$file='/etc/motion/thread'.$Camera->getId().'.conf';
+		$file=$Camera->getLogicalId();
+		if($file=''){
+			if(count(eqLogic::byLogicalId('/etc/motion/motion.conf','motion',true))==0)
+				$file='/etc/motion/motion.conf';
+			else
+				$file='/etc/motion/thread'.$Camera->getId().'.conf';
+			$Camera->setLogicalId($file);
 		}	
 		self::WriteThread($Camera,$file);
 		self::UpdateMotionConf();
@@ -434,14 +437,18 @@ class motion extends eqLogic {
 		$MotionService->Restart(0);
 	}
 	public static function RemoveThread($Camera) {
+		$file=$Camera->getLogicalId();
+		exec('sudo rm  '.$file);
+		if($file=='/etc/motion/motion.conf'){
+			$equipement=eqLogic::byType('motion')[0];
+			exec('sudo rm  '.$equipement->getLogicalId());
+			$equipement->setLogicalId('/etc/motion/motion.conf');
+			$equipement->save();
+		}
+		self::UpdateMotionConf();
 		$Host=config::byKey('Host', 'motion');
 		$Port=config::byKey('Port', 'motion');
 		$MotionService = new MotionService($Host,$Port);
-		if (file_exists('/etc/motion/thread'.$Camera->getId().'.conf'))	
-			exec('sudo rm  /etc/motion/thread'.$Camera->getId().'.conf');
-		if(file_exists($MotionService->getParam($Id, 'target_dir')))
-			exec('sudo rm -R '. dirname(__FILE__).'/../../../../tmp/Motion/'.$Camera->getId());
-		self::UpdateMotionConf();
 		$MotionService->Restart(0);
 	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
