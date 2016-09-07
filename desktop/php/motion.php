@@ -217,14 +217,6 @@ $eqLogics = eqLogic::byType('motion');
 									</div>
 								</div>
 							</div>
-							<div class="CameraPlugin" >
-								<div class="form-group">
-									<label class="col-md-2 control-label">{{Camera}}</label>
-									<div class="col-sm-3 CameraSelect">
-										<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="camera" >
-									</div>
-								</div>
-							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{choisir la palette préférable d'être utilisé par le mouvement}}</label>
 								<div class="col-sm-3">
