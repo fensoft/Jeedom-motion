@@ -508,7 +508,9 @@ class motion extends eqLogic {
 				exec('sudo chmod 777 -R '.$directory);
 			}
 			$directory = calculPath($directory);
-			$output_file = str_replace(' ', '-', $this->getName()) . '.jpg';
+			$output_file = preg_replace('/([^.a-z0-9]+)/i', '-', $this->getName());
+    			$output_file = strtolower($output_file);
+			$output_file .= '.jpg';
 			if (!is_writable($directory)) 
 				exec('sudo chmod 777 -R '.$directory);
 			if (empty($data))
