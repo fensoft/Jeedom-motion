@@ -305,6 +305,8 @@ class motion extends eqLogic {
     }*/
 	public static function UpdateMotionConf() {
 		$file='/etc/motion/motion.conf';
+		$Camera=eqLogic::byLogicalId('/etc/motion/motion.conf','motion',false);
+		self::WriteThread($Camera,$file);
 		if($fp = fopen($file,"w+")){
 			fputs($fp,'daemon on');
 			fputs($fp, "\n");
@@ -429,6 +431,7 @@ class motion extends eqLogic {
 				$file='/etc/motion/thread'.$Camera->getId().'.conf';
 			$Camera->setLogicalId($file);
 			$Camera->save();
+			break;
 		}
 		log::add('motion','debug','Mise a jours du fichier: '.$file);	
 		self::WriteThread($Camera,$file);
