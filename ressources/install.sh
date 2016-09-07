@@ -95,11 +95,7 @@ echo "**************************************************************************
 sudo rm /etc/motion/*
 sudo chmod -R 777 /etc/motion/
 sudo usermod -a -G motion www-data
+#echo 80 > /tmp/compilation_motion_in_progress
 #php /usr/share/nginx/www/jeedom/plugins/motion/core/php/UpdateMotionConf.php
-echo 80 > /tmp/compilation_motion_in_progress
-echo "*****************************************************************************************************"
-echo "*                                     Lancement de motion                                           *"
-echo "***************************************************************************************************sudo **"
-motion
 echo 100 > /tmp/compilation_motion_in_progress
 rm /tmp/compilation_motion_in_progress
