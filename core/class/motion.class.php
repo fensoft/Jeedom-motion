@@ -507,6 +507,8 @@ class motion extends eqLogic {
 				exec('sudo mkdir -p '.$directory);
 				exec('sudo chmod 777 -R '.$directory);
 			}
+			if(substr($directory,-1)!='/')
+				$directory.='/';
 			$directory = calculPath($directory);
 			$output_file = $this->getName();
 			$output_file = htmlentities($output_file, ENT_NOQUOTES, 'utf-8');
@@ -519,12 +521,15 @@ class motion extends eqLogic {
 				exec('sudo chmod 777 -R '.$directory);
 			if (empty($data))
 				return 'plugins/motion/core/template/icones/no-image-blanc.png';
-			file_put_contents($directory . '/' . $output_file, $data);
+			file_put_contents($directory. $output_file, $data);
 			$url=dirname(__FILE__);
+			if(substr($url,-1)!='/')
+				$url.='/';
 			foreach(split('/',$url) as $section)
-				$url.='../';
-			$url=substr($url,0,-1);
-			$url.=$directory . '/' . $output_file;
+				$url.='../';	
+			if(substr($directory,0,1)=='/')
+				$url=substr($url,0,-1);
+			$url.=$directory . $output_file;
 			return 'core/php/downloadFile.php?pathfile=' . urlencode($url);
 		}
 		return 'plugins/motion/core/template/icones/no-image-blanc.png';
