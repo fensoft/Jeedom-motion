@@ -54,7 +54,7 @@ class motion extends eqLogic {
 		}
 		return $usbMapping;
 	}
-    public function preInsert() {
+    	public function preInsert() {
 		$this->setConfiguration('analyse','local');
 		$this->setConfiguration('stream_quality','50');
 		$this->setConfiguration('stream_maxrate','5');
@@ -110,10 +110,10 @@ class motion extends eqLogic {
 		$this->setConfiguration('timelapse_filename','%Y%m%d-timelapse');
 		$this->setConfiguration('ipv6_enabled',0);       
     }
-    public function preSave() {
+	public function preSave() {
 		self::NewThread($this);
 	}
-    public function postSave() {
+	public function postSave() {
 		self::AddCommande($this,__('Parcourir les video', __FILE__),'browseRecord',"info", 'binary');
 		self::AddCommande($this,'Détection','detect',"info", 'binary','','','Motion');
 		self::AddCommande($this,'Dernière photo prise','lastImg',"info", 'string','','Motion');
@@ -130,7 +130,7 @@ class motion extends eqLogic {
 		$CommandeDetection->setValue($StatusDetection->getId());
 		$CommandeDetection->save();
     }
-    public function preRemove() {
+	public function preRemove() {
 		self::RemoveThread($this);
     }
  	public function toHtml($_version = 'dashboard') {
@@ -195,11 +195,11 @@ class motion extends eqLogic {
 		}
 		return template_replace($replace_eqLogic, getTemplate('core', jeedom::versionAlias($version), 'eqLogic', 'motion'));
 	}
-    public static $_widgetPossibility = array('custom' => array(
-        'visibility' => true,
-        'displayName' => false,
-        'optionalParameters' => false,
-  ));
+	public static $_widgetPossibility = array('custom' => array(
+	        'visibility' => true,
+	        'displayName' => false,
+	        'optionalParameters' => false,
+	));
 	public static function AddCommande($eqLogic,$Name,$_logicalId,$Type="info", $SubType='binary',$icone='',$Template='') {
 		$Commande = $eqLogic->getCmd(null,$_logicalId);
 		if (!is_object($Commande))
@@ -512,7 +512,12 @@ class motion extends eqLogic {
 			if (empty($data))
 				return 'plugins/motion/core/template/icones/no-image-blanc.png';
 			file_put_contents($directory . '/' . $output_file, $data);
-			return 'core/php/downloadFile.php?pathfile=' . urlencode($directory . '/' . $output_file);
+			$url=dirname(__FILE__);
+			foreach(split('/',$url) as $section)
+				$url.='../';
+			$url=substr($url,0,-1);
+			$url.=$directory . '/' . $output_file;
+			return 'core/php/downloadFile.php?pathfile=' . urlencode($url);
 		}
 		return 'plugins/motion/core/template/icones/no-image-blanc.png';
 	}	
