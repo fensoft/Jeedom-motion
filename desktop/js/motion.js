@@ -126,28 +126,6 @@ $('body').on('click','.editArea', function() {
 		}
 	});
 });   
-$('.eqLogicAttr[data-l1key=configuration][data-l2key=analyse]').on('change', function() {
-	var Valeur=$('.eqLogicAttr[data-l1key=configuration][data-l2key=analyse]').val();
-	switch($(this).val())
-	{
-		case 'local':
-			$('.MotionPort').hide();
-			$('.MotionPlugin').show();
-			$('.CameraPlugin').hide();
-		break;
-		case 'camera':
-			$('.MotionPort').show();
-			$('.MotionPlugin').hide();
-			$('.CameraPlugin').hide();
-		break;
-		default:
-			$('.MotionPort').hide();
-			$('.MotionPlugin').show();
-			$('.CameraPlugin').hide();
-			UpdateCameraUSB();
-		break;
-	}
-});     
 function addCmdToTable(_cmd) {
   if (!isset(_cmd)) {
         var _cmd = {};
