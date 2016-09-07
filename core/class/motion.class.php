@@ -345,6 +345,7 @@ class motion extends eqLogic {
 		}
 	}
 	private static function WriteThread($Camera,$file){
+		exec('sudo chmod 777 -R /etc/motion/');
 		log::add('motion','debug', 'Création du fichier de configuration thread'.$Camera->getId().'.conf');
 		if($fp = fopen($file,"w+")){
 			fputs($fp, 'text_left '.urlencode($Camera->getName()));
