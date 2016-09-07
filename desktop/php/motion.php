@@ -124,12 +124,6 @@ $eqLogics = eqLogic::byType('motion');
 
 								</div>
 							</div>
-							<div class="form-group MotionPort" style="{display:none;}">
-								<label class="col-md-2 control-label">{{Port de controle Motion de la Camera}}</label>
-								<div class="col-sm-3 ">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="cameraMotionPort">
-								</div>
-							</div>
 						</div>
 					</div>
 					<div class="tab-pane" id="StreamOptions">
