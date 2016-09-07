@@ -503,8 +503,10 @@ class motion extends eqLogic {
 			$data=trim(substr($data,0,stripos($data,'--myboundary')-2));
 			$data=trim(substr($data,0,stripos($data,'--BoundaryString')-2));
 			$directory=config::byKey('SnapshotFolder','motion');
-			if (!file_exists($directory))
-				mkdir($directory,0777,true);
+			if(!file_exists($directory)){
+				exec('sudo mkdir -p '.$directory);
+				exec('sudo chmod 777 -R '.$directory);
+			}
 			$directory = calculPath($directory);
 			$output_file = str_replace(' ', '-', $this->getName()) . '.jpg';
 			if (!is_writable($directory)) 
@@ -523,8 +525,10 @@ class motion extends eqLogic {
 	}	
 	public static function CleanFolder($CameraId) {
 		$directory=config::byKey('SnapshotFolder','motion'). $CameraId;
-		if (!file_exists($directory))
-			mkdir($directory,0777,true);
+		if(!file_exists($directory)){
+			exec('sudo mkdir -p '.$directory);
+			exec('sudo chmod 777 -R '.$directory);
+		}
 		$size = 0;
 		foreach(scandir($directory, 1) as $file) {
 			if(is_file($directory.$file) && $file != '.' && $file != '..'  && $file != 'lastsnap.jpg') {	
