@@ -508,8 +508,12 @@ class motion extends eqLogic {
 				exec('sudo chmod 777 -R '.$directory);
 			}
 			$directory = calculPath($directory);
-			$output_file = preg_replace('/([^.a-z0-9]+)/i', '-', $this->getName());
-    			$output_file = strtolower($output_file);
+			$output_file = $this->getName();
+			$output_file = htmlentities($output_file, ENT_NOQUOTES, 'utf-8');
+			$output_file = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $output_file);
+			$output_file = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $output_file); // pour les ligatures e.g. '&oelig;'
+			$output_file = preg_replace('#&[^;]+;#', '', $output_file); // supprime les autres caractères
+			$output_file = strtolower($output_file);
 			$output_file .= '.jpg';
 			if (!is_writable($directory)) 
 				exec('sudo chmod 777 -R '.$directory);
