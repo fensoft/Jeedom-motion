@@ -93,64 +93,6 @@ echo "**************************************************************************
 echo "*                                     Configuration de motion                                       *"
 echo "*****************************************************************************************************"
 sudo rm /etc/motion/*
-sudo tee /etc/motion/motion.conf <<- 'EOF'
-# /etc/motion/motion.conf
-# Rename this distribution example file to motion.conf
-
-############################################################
-# Daemon
-############################################################
-
-# Start in daemon (background) mode and release terminal (default: off)
-daemon on
-
-# File to store the process ID, also called pid file. (default: not defined)
-# process_id_file /var/run/motion/motion.pid
-
-############################################################
-# Basic Setup Mode
-############################################################
-
-# Start in Setup-Mode, daemon disabled. (default: off)
-setup_mode off
-
-
-# Use a file to save logs messages, if not defined stderr and syslog is used. (default: not defined)
-logfile /etc/motion/motion.log
-
-# Level of log messages [1..9] (EMR, ALR, CRT, ERR, WRN, NTC, INF, DBG, ALL). (default: 6 / NTC)
-log_level 6
-
-# Filter to log messages by type (COR, STR, ENC, NET, DBL, EVT, TRK, VID, ALL). (default: ALL)
-log_type all
-
-############################################################
-# Global Network Options
-############################################################
-# Enable or disable IPV6 for http control and stream (default: off )
-ipv6_enabled off
-
-############################################################
-# HTTP Based Control
-############################################################
-
-# TCP/IP port for the http server to listen on (default: 0 = disabled)
-control_port 8080
-webcontrol_port 8080
-
-# Restrict control connections to localhost only (default: on)
-control_localhost off
-webcontrol_localhost off
-
-# Output for http server, select off to choose raw text plain (default: on)
-control_html_output off
-webcontrol_html_output off
-
-# Authentication for the http based control. Syntax username:password
-# Default: not defined (Disabled)
-; webcontrol_authentication username:password
-
-EOF
 sudo chmod -R 777 /etc/motion/
 sudo usermod -a -G motion www-data
 #php /usr/share/nginx/www/jeedom/plugins/motion/core/php/UpdateMotionConf.php
