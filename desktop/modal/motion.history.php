@@ -27,7 +27,6 @@ foreach(split('/',$url) as $section)
 	$url.='../';	
 if(substr($directory,0,1)=='/')
 	$url=substr($url,0,-1);
-motion::UploadImg($camera->getId());
 $files = array();
 $offset=strpos($camera->getConfiguration('snapshot_filename'),'-')+1;
 $StartAnnée=strpos($camera->getConfiguration('snapshot_filename'),'%Y')-$offset;
