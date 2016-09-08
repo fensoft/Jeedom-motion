@@ -643,11 +643,20 @@ class motionCmd extends cmd {
 		}
 	}
 	public function execute($_options = array()) {
+		$directory=config::byKey('SnapshotFolder','motion');
+		if(substr($directory,-1)!='/')
+			$directory.='/';
+		$directory.=$this->getEqLogic->getId().'/';
+		if(!file_exists($directory)){
+			exec('sudo mkdir -p '.$directory);
+			exec('sudo chmod 777 -R '.$directory);
+		}
+		$directory = calculPath($directory);
 		$Host=config::byKey('Host', 'motion');
 		$Port=config::byKey('Port', 'motion');	
 		log::add('motion','debug','Connexion au motion '.$Host.':'.$Port);
 		$MotionService = new MotionService($Host,$Port);
-		$IdMotionCamera=$MotionService->getCameraId(dirname(__FILE__).'/../../../../tmp/Motion/'.$this->getEqLogic()->getId());
+		$IdMotionCamera=$MotionService->getCameraId($directory);
 		switch($this->getLogicalId())
 		{
 			case 'snapshot':
