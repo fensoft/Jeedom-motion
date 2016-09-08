@@ -355,12 +355,12 @@ class motion extends eqLogic {
 			$directory=config::byKey('SnapshotFolder','motion');
 			if(substr($directory,-1)!='/')
 				$directory.='/';
-			$directory.=$camera->getId().'/';
-			$directory = calculPath($directory);
+			$directory.=$Camera->getId().'/';
 			if(!file_exists($directory)){
 				exec('sudo mkdir -p '.$directory);
 				exec('sudo chmod 777 -R '.$directory);
 			}
+			$directory = calculPath($directory);
 			fputs($fp, 'target_dir '.$directory);
 			fputs($fp, "\n");
 			$adress=network::getNetworkAccess('internal').'/plugins/motion/core/php/detect.php';
