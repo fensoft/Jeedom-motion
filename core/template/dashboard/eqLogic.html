@@ -5,7 +5,7 @@
     </center>
     <center>
         <span class="directDisplay zoom cursor" style="width : 90%;max-height:90%">
-			<span class="Detection" style="position:absolute; width:180px; text-align:right;">
+			<span class="Detection" style="position:absolute; width:100px; text-align:right;">
 				#detect#
 			</span>
 			<img class="ImgVideoFlux img-responsive"src="plugins/motion/core/template/icones/no-image-blanc.png"  data-eqLogic_id="#id#" style="z-index:1"/>
@@ -40,7 +40,6 @@
 					}
 					if(!data.result){
 						$(".eqLogic[data-eqLogic_id=#id#] .ImgVideoFlux").attr('src','plugins/motion/core/template/icones/no-image-blanc.png');
-						$('.eqLogic[data-eqLogic_id=#id#] .ImgVideoFlux').attr('src','plugins/motion/core/template/icones/no-image-blanc.png');
 					}
 					else {
 						var url = data.result;
@@ -49,7 +48,7 @@
 						}else{
 							url += '?t='+(new Date()).getTime();
 						}
-                    		$(".eqLogic[data-eqLogic_id=#id#] .ImgVideoFlux ").attr('src',url);
+                    				$(".eqLogic[data-eqLogic_id=#id#] .ImgVideoFlux ").attr('src',url);
 							 if($('.eqLogic[data-eqLogic_id=#id#] .directDisplay').html() != undefined)
 							   timeoutCamera#id# = setTimeout(refreshImgCam#id#, #refreshDelay#);
 					}
