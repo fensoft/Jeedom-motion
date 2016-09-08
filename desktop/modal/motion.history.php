@@ -19,6 +19,7 @@ if(!file_exists($directory)){
 }
 if(substr($directory,-1)!='/')
 	$directory.='/';
+$directory.=$camera->getId().'/';
 $directory = calculPath($directory);
 $url=dirname(__FILE__);
 if(substr($url,-1)!='/')
