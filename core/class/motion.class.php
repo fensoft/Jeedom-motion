@@ -350,12 +350,12 @@ class motion extends eqLogic {
 		log::add('motion','debug','Mise a jours du fichier: '.$file);	
 		exec('sudo chmod 777 -R /etc/motion/');
 		if($fp = fopen($file,"w+")){
-			fputs($fp, 'text_left '.urlencode($Camera->getName()));
+			fputs($fp, 'text_left '.$Camera->getName());
 			fputs($fp, "\n");
-			fputs($fp, 'target_dir '.urlencode(dirname(__FILE__).'/../../../../tmp/Motion/'.$Camera->getId()));
+			fputs($fp, 'target_dir '.dirname(__FILE__).'/../../../../tmp/Motion/'.$Camera->getId());
 			fputs($fp, "\n");
 			$adress=network::getNetworkAccess('internal').'/plugins/motion/core/php/detect.php';
-			fputs($fp, 'on_event_end '.urlencode( 'curl -v --header "Connection: keep-alive" "' . $adress.'?id='.$Camera->getId().'&state=0&width=%i&height=%J&X=%K&Y=%L"'));
+			fputs($fp, 'on_event_end curl -v --header "Connection: keep-alive" "' . $adress.'?id='.$Camera->getId().'&state=0&width=%i&height=%J&X=%K&Y=%L"');
 			fputs($fp, "\n");
 			//Definition du parametre area_detect
 			$AreaDetect='';
@@ -366,25 +366,25 @@ class motion extends eqLogic {
 			if ($AreaDetect!=''){
 				fputs($fp, 'area_detect '.$AreaDetect);					
 				fputs($fp, "\n");
-				fputs($fp, 'on_area_detected '.urlencode( 'curl -v --header "Connection: keep-alive" "' . $adress.'?id='.$Camera->getId().'&state=1&width=%i&height=%J&X=%K&Y=%L"'));
+				fputs($fp, 'on_area_detected curl -v --header "Connection: keep-alive" "' . $adress.'?id='.$Camera->getId().'&state=1&width=%i&height=%J&X=%K&Y=%L"');
 				fputs($fp, "\n");
 			}else{
-				fputs($fp, 'on_event_start '.urlencode( 'curl -v --header "Connection: keep-alive" "' . $adress.'?id='.$Camera->getId().'&state=1&width=%i&height=%J&X=%K&Y=%L"'));
+				fputs($fp, 'on_event_start curl -v --header "Connection: keep-alive" "' . $adress.'?id='.$Camera->getId().'&state=1&width=%i&height=%J&X=%K&Y=%L"');
 				fputs($fp, "\n");
 			}
 			fputs($fp, 'netcam_http 1.1');
 			fputs($fp, "\n");
 			switch ($Camera->getConfiguration('cameraType')){
 				case 'ip':
-					fputs($fp, 'netcam_url '.urlencode(trim($Camera->getConfiguration('cameraUrl'))));
+					fputs($fp, 'netcam_url '.trim($Camera->getConfiguration('cameraUrl')));
 					fputs($fp, "\n");
 					if($Camera->getConfiguration('cameraLogin')!='' || $Camera->getConfiguration('cameraPass')!=''){
-						fputs($fp, 'netcam_userpass '.urlencode(trim($Camera->getConfiguration('cameraLogin').':'.$Camera->getConfiguration('cameraPass'))));
+						fputs($fp, 'netcam_userpass '.trim($Camera->getConfiguration('cameraLogin').':'.$Camera->getConfiguration('cameraPass')));
 						fputs($fp, "\n");
 					}
 				break;
 				case 'usb':
-					fputs($fp, 'videodevice '.urlencode(trim($Camera->getConfiguration('cameraUSB'))));
+					fputs($fp, 'videodevice '.trim($Camera->getConfiguration('cameraUSB')));
 					fputs($fp, "\n");
 				break;
 			}
@@ -397,26 +397,26 @@ class motion extends eqLogic {
 							$value='on';
 					}
 					if ($key=='stream_motion') {
-						fputs($fp,'webcam_motion '.urlencode(trim($value)));
+						fputs($fp,'webcam_motion '.trim($value));
 						fputs($fp, "\n");
 					}
 					if ($key=='stream_port'){
-						fputs($fp,'webcam_port '.urlencode(trim($value)));
+						fputs($fp,'webcam_port '.trim($value));
 						fputs($fp, "\n");
 					}
 					if ($key=='stream_localhost'){
-						fputs($fp,'webcam_localhost '.urlencode(trim($value)));
+						fputs($fp,'webcam_localhost '.trim($value));
 						fputs($fp, "\n");
 					}
 					if ($key=='stream_quality'){
-						fputs($fp,'webcam_quality '.urlencode(trim($value)));
+						fputs($fp,'webcam_quality '.trim($value));
 						fputs($fp, "\n");
 					}
 					if ($key=='stream_maxrate'){
-						fputs($fp,'webcam_maxrate '.urlencode(trim($value)));
+						fputs($fp,'webcam_maxrate '.trim($value));
 						fputs($fp, "\n");
 					}
-					fputs($fp,$key.' '.urlencode(trim($value)));
+					fputs($fp,$key.' '.trim($value));
 					fputs($fp, "\n");
 				}
 			}
@@ -466,7 +466,7 @@ class motion extends eqLogic {
 			if($this->getConfiguration('stream_port')!=''){
 				$urlStream='http://';
 				if($this->getConfiguration('stream_auth_method')!=0 && $this->getConfiguration('stream_authentication')!='')
-					$urlStream.=urlencode($this->getConfiguration('stream_authentication')).'@';
+					$urlStream.=$this->getConfiguration('stream_authentication').'@';
 				$urlStream.=config::byKey('Host', 'motion').':'.$this->getConfiguration('stream_port');
 				$urlStream.='/stream.mjpg';
 			}
