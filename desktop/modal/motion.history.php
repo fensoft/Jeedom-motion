@@ -13,13 +13,13 @@ if ($camera->getEqType_name() != 'motion') {
 	throw new Exception(__('Cet équipement n\'est pas de type motion : ', __FILE__) . $camera->getEqType_name());
 }
 $directory=config::byKey('SnapshotFolder','motion');
+if(substr($directory,-1)!='/')
+	$directory.='/';
+$directory.=$camera->getId().'/';
 if(!file_exists($directory)){
 	exec('sudo mkdir -p '.$directory);
 	exec('sudo chmod 777 -R '.$directory);
 }
-if(substr($directory,-1)!='/')
-	$directory.='/';
-$directory.=$camera->getId().'/';
 $directory = calculPath($directory);
 $url=dirname(__FILE__);
 if(substr($url,-1)!='/')
