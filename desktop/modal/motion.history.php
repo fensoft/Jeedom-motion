@@ -12,12 +12,21 @@ if (!is_object($camera)) {
 if ($camera->getEqType_name() != 'motion') {
 	throw new Exception(__('Cet équipement n\'est pas de type motion : ', __FILE__) . $camera->getEqType_name());
 }
-$dir=dirname(__FILE__) . '/../../../../tmp/Motion/';
-if (!file_exists($dir))
-	mkdir($dir);
-$dir=$dir . $camera->getId().'/';
-if (!file_exists($dir))
-	mkdir($dir);
+$directory=config::byKey('SnapshotFolder','motion');
+if(!file_exists($directory)){
+	exec('sudo mkdir -p '.$directory);
+	exec('sudo chmod 777 -R '.$directory);
+}
+if(substr($directory,-1)!='/')
+	$directory.='/';
+$directory = calculPath($directory);
+$url=dirname(__FILE__);
+if(substr($url,-1)!='/')
+	$url.='/';
+foreach(split('/',$url) as $section)
+	$url.='../';	
+if(substr($directory,0,1)=='/')
+	$url=substr($url,0,-1);
 motion::UploadImg($camera->getId());
 $files = array();
 $offset=strpos($camera->getConfiguration('snapshot_filename'),'-')+1;
@@ -27,7 +36,7 @@ $StartJour=strpos($camera->getConfiguration('snapshot_filename'),'%d')+2-$offset
 $StartHeure=strpos($camera->getConfiguration('snapshot_filename'),'%H')+2-$offset;
 $StartMinute=strpos($camera->getConfiguration('snapshot_filename'),'%M')+2-$offset;
 $StartSeconde=strpos($camera->getConfiguration('snapshot_filename'),'%S')+2-$offset;
-foreach (ls($dir, '*') as $file) {
+foreach (ls($directory, '*') as $file) {
 	if($file != 'lastsnap.jpg'){
 		$offset=strpos($file,'-')+1;
 		$time = substr($file,$StartHeure+$offset,2).':'.substr($file,$StartMinute+$offset,2).':'.substr($file,$StartSeconde+$offset,2);
@@ -64,17 +73,17 @@ foreach ($files as $date => &$file) {
 		if (isset($filename['photo'])){
 			echo '<div class="cameraDisplayCard" style="background-color: #e7e7e7;padding:5px;height:167px;">';
 			echo '<center>' . $time . '</center>';
-			echo '<center><img class="img-responsive cursor displayImage" src="core/php/downloadFile.php?pathfile=' . urlencode($dir . '/' . $filename['photo']) . '" width="150"/></center>';
-			echo '<center style="margin-top:5px;"><a href="' . urlencode($dir . '/' . $filename['photo']) . '" class="btn btn-success btn-xs" style="color : white"><i class="fa fa-download"></i></a>';
-			echo ' <a class="btn btn-danger bt_removeCameraFile btn-xs" style="color : white" data-filename="' . $dir . '/' . $filename['photo'] . '"><i class="fa fa-trash-o"></i></a></center>';
+			echo '<center><img class="img-responsive cursor displayImage" src="core/php/downloadFile.php?pathfile=' . urlencode($url.$directory.$filename['photo']) . '" width="150"/></center>';
+			echo '<center style="margin-top:5px;"><a href="core/php/downloadFile.php?pathfile=' . urlencode($url.$directory.$filename['photo']) . '" class="btn btn-success btn-xs" style="color : white"><i class="fa fa-download"></i></a>';
+			echo ' <a class="btn btn-danger bt_removeCameraFile btn-xs" style="color : white" data-filename="' . $directory . $filename['photo'] . '"><i class="fa fa-trash-o"></i></a></center>';
 			echo '</div>';
 		}
 		if (isset($filename['video'])){
 			echo '<div class="cameraDisplayCard" style="background-color: #e7e7e7;padding:5px;height:167px;">';
 			echo '<center>' . $time . '</center>';
-			echo '<center><i class="img-responsive cursor displayImage fa fa-file-video-o fa-5x" src="' . urlencode($dir . '/' . $filename['video']) . '" width="150"></i></center>';
-			echo '<center style="margin-top:5px;"><a href="core/php/downloadFile.php?pathfile=' . urlencode($dir . '/' . $filename['video']) . '" class="btn btn-success btn-xs" style="color : white"><i class="fa fa-download"></i></a>';
-			echo ' <a class="btn btn-danger bt_removeCameraFile btn-xs" style="color : white" data-filename="' . $dir . '/' . $filename['video'] . '"><i class="fa fa-trash-o"></i></a></center>';
+			echo '<center><i class="img-responsive cursor displayImage fa fa-file-video-o fa-5x" src="' . urlencode($url$directory . $filename['video']) . '" width="150"></i></center>';
+			echo '<center style="margin-top:5px;"><a href="core/php/downloadFile.php?pathfile=' . urlencode($url.$directory . $filename['video']) . '" class="btn btn-success btn-xs" style="color : white"><i class="fa fa-download"></i></a>';
+			echo ' <a class="btn btn-danger bt_removeCameraFile btn-xs" style="color : white" data-filename="' . $directory . $filename['video'] . '"><i class="fa fa-trash-o"></i></a></center>';
 			echo '</div>';
 		}
 	}
