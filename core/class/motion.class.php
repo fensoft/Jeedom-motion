@@ -503,10 +503,8 @@ class motion extends eqLogic {
 				$data.=fread($f,1024);
 			
 			fclose($f);
-			$data=substr($data,stripos($data,"Content-Length"));
-			$data=substr($data,stripos($data,"\n")+3);
-			$data=trim(substr($data,0,stripos($data,'--myboundary')-2));
-			$data=trim(substr($data,0,stripos($data,'--BoundaryString')-2));
+			$data=substr($data,strpos($data,"\r\n\r\n")+4);
+			$data=trim(substr($data,0,stripos($data,"--myboundary")-2));
 			$directory=config::byKey('SnapshotFolder','motion');
 			if(!file_exists($directory)){
 				exec('sudo mkdir -p '.$directory);
