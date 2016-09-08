@@ -352,7 +352,16 @@ class motion extends eqLogic {
 		if($fp = fopen($file,"w+")){
 			fputs($fp, 'text_left '.$Camera->getName());
 			fputs($fp, "\n");
-			fputs($fp, 'target_dir '.dirname(__FILE__).'/../../../../tmp/Motion/'.$Camera->getId());
+			$directory=config::byKey('SnapshotFolder','motion');
+			if(substr($directory,-1)!='/')
+				$directory.='/';
+			$directory.=$camera->getId().'/';
+			$directory = calculPath($directory);
+			if(!file_exists($directory)){
+				exec('sudo mkdir -p '.$directory);
+				exec('sudo chmod 777 -R '.$directory);
+			}
+			fputs($fp, 'target_dir '.$directory);
 			fputs($fp, "\n");
 			$adress=network::getNetworkAccess('internal').'/plugins/motion/core/php/detect.php';
 			fputs($fp, 'on_event_end curl -v --header "Connection: keep-alive" "' . $adress.'?id='.$Camera->getId().'&state=0&width=%i&height=%J&X=%K&Y=%L"');
