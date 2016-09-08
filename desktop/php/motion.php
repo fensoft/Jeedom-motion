@@ -70,14 +70,14 @@ $eqLogics = eqLogic::byType('motion');
 					<li class="active"><a href="#General" role="tab" data-toggle="tab">{{General}}</a></li>
 					<li><a href="#CaptureDeviceOptions" role="tab" data-toggle="tab">{{Option de capture}}</a></li>
 					<li><a href="#StreamOptions" role="tab" data-toggle="tab">{{Option de stream}}</a></li>
-					<li><a href="#TrackingOptions expertModeVisible" role="tab" data-toggle="tab">{{Option de Tracking}}</a></li>
-					<li><a href="#RoundRobin expertModeVisible" role="tab" data-toggle="tab">{{Round Robin}}</a></li>
-					<li><a href="#MotionDetectionSettings expertModeVisible" role="tab" data-toggle="tab">{{Parametre de Detection}}</a></li>
-					<li><a href="#ImageFileOutput expertModeVisible" role="tab" data-toggle="tab">{{Photo options}}</a></li>
-					<li><a href="#FFMPEGoptions expertModeVisible" role="tab" data-toggle="tab">{{Video options}}</a></li>
+					<li><a href="#TrackingOptions" role="tab" data-toggle="tab">{{Option de Tracking}}</a></li>
+					<li><a href="#RoundRobin" role="tab" data-toggle="tab">{{Round Robin}}</a></li>
+					<li><a href="#MotionDetectionSettings" role="tab" data-toggle="tab">{{Parametre de Detection}}</a></li>
+					<li><a href="#ImageFileOutput" role="tab" data-toggle="tab">{{Photo options}}</a></li>
+					<li><a href="#FFMPEGoptions" role="tab" data-toggle="tab">{{Video options}}</a></li>
 					<li><a href="#TextDisplay" role="tab" data-toggle="tab">{{Affichage de text}}</a></li>
-					<li><a href="#Filenames expertModeVisible" role="tab" data-toggle="tab">{{Nommage des fichiers}}</a></li>
-					<li><a href="#GlobalNetworkOptions expertModeVisible" role="tab" data-toggle="tab">{{Reseau}}</a></li>
+					<li><a href="#Filenames" role="tab" data-toggle="tab">{{Nommage des fichiers}}</a></li>
+					<li><a href="#GlobalNetworkOptions" role="tab" data-toggle="tab">{{Reseau}}</a></li>
 				</ul>
 				<div class="tab-content">      	
 					<div class="tab-pane active" id="General">
@@ -272,37 +272,37 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Fréquence à régler le tuner (kHz) (uniquement pour les cartes tuner TV)}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="frequency" value="0" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="frequency" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Rotation de l'image (degrés)}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="rotate" value="0" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="rotate"/>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Largeur de l'image capturée (pixel)}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="width" value="380" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="width" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Hauteur de l'image capturée (pixel)}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="height" value="240" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="height" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Nombre maximum d'image par seconde}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="framerate" value="5" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="framerate"/>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Délai minimum entre les captures (s)}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="minimum_frame_time" value="0" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="minimum_frame_time" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -320,25 +320,25 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Luminosité}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="brightness" value="0" max="255" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="brightness" max="255" min="0" step="1" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Contraste}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="contrast" value="0" max="255" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="contrast" max="255" min="0" step="1" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Saturation}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="saturation" value="0" max="255" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="saturation" max="255" min="0" step="1" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Réglez la teinte}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="hue" value="0" max="255" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="hue" max="255" min="0" step="1" />
 								</div>
 							</div>
 						</div>
@@ -350,13 +350,13 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Nombre de cadres de capturer à chaque étape}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="roundrobin_frames" value="0" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="roundrobin_frames" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Nombre d'images à ignorer avant chaque étape}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="roundrobin_skip" value="0" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="roundrobin_skip" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -374,13 +374,13 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2  control-label">Règle la sensibilité de la détection de mouvement</label>
 								<div class="col-sm-3 ">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="threshold" value="1500" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="threshold" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Seuil de bruit pour la détection de mouvement}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="noise_level" value="32" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="noise_level"  />
 								</div>
 							</div>
 							<div class="form-group">
@@ -398,43 +398,43 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Créer dynamiquement un fichier de masque pendant le fonctionnement}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="smart_mask_speed" value="0" max="10" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="smart_mask_speed" max="10" min="0" step="1" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Ignorer les changements d'intensité lumineuse soudaine massives (% de l'image)}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="lightswitch" value="0" max="100" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="lightswitch" max="100" min="0" step="1" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Cadres doivent contenir le mouvement au moins le nombre d'images spécifié}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="minimum_motion_frames" value="0" max="5" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="minimum_motion_frames" max="5" min="0" step="1" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Indique le nombre de photos pré-capturées avant le mouvement}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="pre_capture" value="0" max="5" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="pre_capture" max="5" min="0" step="1" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Nombre d'images capturer après le mouvement}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="post_capture" value="0" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="post_capture" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Temps sans détection de mouvement qui déclenche la fin d'un événement.}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="event_gap" value="60" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="event_gap"/>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Temps maximal d'une video}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="max_movie_time" value="0" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="max_movie_time"/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -452,7 +452,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2  control-label">Prendre un snapshot tout les x seconde :</label>
 								<div class="col-sm-3 ">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="snapshot_interval" value="0" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="snapshot_interval"/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -476,7 +476,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{La qualité à utiliser pour la compression JPEG}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="quality" value="75" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="quality"/>
 								</div>
 							</div>
 						</div>
@@ -500,7 +500,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Timelapse de la video}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="ffmpeg_timelapse" value="0" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="ffmpeg_timelapse"/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -519,7 +519,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Bitrate utilisé par le codeur ffmpeg}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="ffmpeg_bps" value="500000" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="ffmpeg_bps"/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -574,7 +574,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2  control-label">Choisir le texte a afficher a droite :</label>
 								<div class="col-sm-3 ">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="text_right" value="%Y-%m-%d\n%T-%q" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="text_right"/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -586,7 +586,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2  control-label">Texte a ajouter lors d'un evenement :</label>
 								<div class="col-sm-3 ">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="text_event" value="%Y%m%d%H%M%S" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="text_event"/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -610,25 +610,25 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2  control-label">Nom du fichier snapshot :</label>
 								<div class="col-sm-3 ">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="snapshot_filename" value="%v-%Y%m%d%H%M%S-snapshot" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="snapshot_filename"/>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2  control-label">Nom du fichier de snapshot lors d'une detection :</label>
 								<div class="col-sm-3 ">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="picture_filename" value="%v-%Y%m%d%H%M%S-%q" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="picture_filename" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2  control-label">Nom du fichier de video lors d'une detection :</label>
 								<div class="col-sm-3 ">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="movie_filename" value="%v-%Y%m%d%H%M%S" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="movie_filename"/>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2  control-label">Nom du fichier de video lors d'un timelapse :</label>
 								<div class="col-sm-3 ">
-									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="timelapse_filename" value="%Y%m%d-timelapse" />
+									<input class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="timelapse_filename"/>
 								</div>
 							</div>
 						</div>
