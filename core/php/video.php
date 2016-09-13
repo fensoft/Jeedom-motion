@@ -13,11 +13,12 @@ if(is_object($Camera)){
 			$urlStream.='/stream.mjpg';
 		}
 	}else {
+		$url=explode('://',$Camera->getConfiguration('cameraUrl'));
 		switch ($Camera->getConfiguration('cameraType'))
 		{
 			case 'ip':
 				if($Camera->getConfiguration('cameraLogin')!='' && $Camera->getConfiguration('cameraPass')!='')
-					$urlStream=split('://',$Camera->getConfiguration('cameraUrl'))[0].'://'.$Camera->getConfiguration('cameraLogin').':'.$Camera->getConfiguration('cameraPass').'@'.split('://',$Camera->getConfiguration('cameraUrl'))[1];
+					$urlStream=$url[0].'://'.$Camera->getConfiguration('cameraLogin').':'.$Camera->getConfiguration('cameraPass').'@'.$url[1];
 				else
 					$urlStream=$Camera->getConfiguration('cameraUrl');
 			break;
