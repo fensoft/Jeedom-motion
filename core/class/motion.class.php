@@ -481,11 +481,12 @@ class motion extends eqLogic {
 			}
 		}	
 		else {
+			$url=explode('://',$this->getConfiguration('cameraUrl'));
 			switch ($this->getConfiguration('cameraType'))
 			{
 				case 'ip':
 					if($this->getConfiguration('cameraLogin')!='' && $this->getConfiguration('cameraPass')!='')
-						$urlStream=split('://',$this->getConfiguration('cameraUrl'))[0].'://'.$this->getConfiguration('cameraLogin').':'.$this->getConfiguration('cameraPass').'@'.split('://',$this->getConfiguration('cameraUrl'))[1];
+						$urlStream=$url[0].'://'.$this->getConfiguration('cameraLogin').':'.$this->getConfiguration('cameraPass').'@'.$url[1];
 					else
 						$urlStream=$this->getConfiguration('cameraUrl');
 				break;
@@ -537,7 +538,7 @@ class motion extends eqLogic {
 			$url=dirname(__FILE__);
 			if(substr($url,-1)!='/')
 				$url.='/';
-			foreach(split('/',$url) as $section)
+			foreach(explode('/',$url) as $section)
 				$url.='../';	
 			if(substr($directory,0,1)=='/')
 				$url=substr($url,0,-1);
