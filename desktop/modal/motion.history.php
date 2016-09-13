@@ -24,7 +24,7 @@ $directory = calculPath($directory);
 $url=dirname(__FILE__);
 if(substr($url,-1)!='/')
 	$url.='/';
-foreach(split('/',$url) as $section)
+foreach(explode('/',$url) as $section)
 	$url.='../';	
 if(substr($directory,0,1)=='/')
 	$url=substr($url,0,-1);
