@@ -192,15 +192,15 @@ function editPolygon() {
 					// Get middle position of resizer
 					var x = Math.round(ui.position.left) + (cornerWidth / 2) + 1;
 					var y = Math.round(ui.position.top) + (cornerHeight / 2) + 1;
-					coords[$(this).attr('id').split('_')[1]][0]=x;
-					coords[$(this).attr('id').split('_')[1]][1]=y;
+					coords[$(this).attr('id').explode('_')[1]][0]=x;
+					coords[$(this).attr('id').explode('_')[1]][1]=y;
 					updateCoords();
 				},
 			});
 
 			// Catch right click on corner resizer and remove point
 			cornerDiv.contextmenu(function(e) {
-				coords.splice(parseInt($(this).attr('id').split('_')[1]),1);					
+				coords.splice(parseInt($(this).attr('id').explode('_')[1]),1);					
 				updateCoords();
 			});
 			
@@ -215,7 +215,7 @@ function editPolygon() {
 					var x = Math.round(ui.position.left) + (cornerWidth / 2) + 1;
 					var y = Math.round(ui.position.top) + (cornerHeight / 2) + 1;
 					var coord=[x,y];
-					coords.splice(parseInt($(this).attr('id').split('_')[1])+1,0,coord);					
+					coords.splice(parseInt($(this).attr('id').explode('_')[1])+1,0,coord);					
 					updateCoords();
 				},
 			});
