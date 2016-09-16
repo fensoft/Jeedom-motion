@@ -82,13 +82,13 @@ echo 70 > /tmp/compilation_motion_in_progress
 #./configure --without-mysql --without-pgsql 
 #make
 #sudo make install
-echo "*****************************************************************************************************"
-echo "*                                     Demarrage automatique                                         *"
-echo "*****************************************************************************************************"
-sudo tee /etc/default/motion <<- 'EOF'
-start_motion_daemon=yes
-EOF
-echo 75 > /tmp/compilation_motion_in_progress
+#echo "*****************************************************************************************************"
+#echo "*                                     Demarrage automatique                                         *"
+#echo "*****************************************************************************************************"
+#sudo tee /etc/default/motion <<- 'EOF'
+#start_motion_daemon=yes
+#EOF
+#echo 75 > /tmp/compilation_motion_in_progress
 echo "*****************************************************************************************************"
 echo "*                                     Configuration de motion                                       *"
 echo "*****************************************************************************************************"
@@ -98,4 +98,7 @@ sudo usermod -a -G motion www-data
 #echo 80 > /tmp/compilation_motion_in_progress
 #php /usr/share/nginx/www/jeedom/plugins/motion/core/php/UpdateMotionConf.php
 echo 100 > /tmp/compilation_motion_in_progress
+echo "*****************************************************************************************************"
+echo "*                                Installation de motion terminé                                     *"
+echo "*****************************************************************************************************"
 rm /tmp/compilation_motion_in_progress
