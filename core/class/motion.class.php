@@ -414,7 +414,7 @@ class motion extends eqLogic {
 		if(substr($directory,-1)!='/')
 			$directory.='/';
 		if($Snapshot){
-			$directory.=$this->getEqLogic()->getId().'/';
+			$directory.=$this->getId().'/';
 			if(!file_exists($directory)){
 				exec('sudo mkdir -p '.$directory);
 				exec('sudo chmod 777 -R '.$directory);
