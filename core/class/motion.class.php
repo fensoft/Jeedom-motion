@@ -241,15 +241,9 @@ class motion extends eqLogic {
 			fputs($fp, "\n");
 			fputs($fp,'ipv6_enabled off');
 			fputs($fp, "\n");
-			fputs($fp,'control_port 8080');
-			fputs($fp, "\n");
-			fputs($fp,'webcontrol_port 8080');
-			fputs($fp, "\n");
-			fputs($fp,'control_localhost off');
+			fputs($fp,'webcontrol_port '.config::byKey('Port', 'motion'));
 			fputs($fp, "\n");
 			fputs($fp,'webcontrol_localhost off');
-			fputs($fp, "\n");
-			fputs($fp,'control_html_output off');
 			fputs($fp, "\n");
 			fputs($fp,'webcontrol_html_output off');
 			fputs($fp, "\n");
@@ -293,7 +287,7 @@ class motion extends eqLogic {
 				fputs($fp, 'on_event_start curl -v --header "Connection: keep-alive" "' . $adress.'?id='.$Camera->getId().'&state=1&width=%i&height=%J&X=%K&Y=%L"');
 				fputs($fp, "\n");
 			}
-			fputs($fp, 'netcam_http 1.1');
+			fputs($fp, 'netcam_keepalive force');
 			fputs($fp, "\n");
 			switch ($Camera->getConfiguration('cameraType')){
 				case 'ip':
@@ -310,35 +304,43 @@ class motion extends eqLogic {
 				break;
 			}
 			foreach($Camera->getConfiguration() as $key => $value)	{
-				if ($key!='createtime' && $key!='updatetime' && $key!='plugin' && $key!='camera'&& $key!='cameraUrl' && $key!='cameraLogin' && $key!='cameraPass' && $key!='analyse' && $key!='cameraMotionPort' && $key!='cameraUSB' && $key!='cameraType'){
-					if ($key=='stream_motion' || $key=='stream_localhost'|| $key=='netcam_tolerant_check'|| $key=='auto_brightness'|| $key=='switchfilter'|| $key=='noise_tune'|| $key=='emulate_motion'|| $key=='output_debug_pictures'|| $key=='ffmpeg_output_movies'|| $key=='ffmpeg_output_debug_movies'|| $key=='ffmpeg_deinterlace'|| $key=='locate_motion_mode'|| $key=='text_changes'|| $key=='text_double'|| $key=='ipv6_enabled'){
-						if($value==0)
-							$value='off';
-						else
-							$value='on';
-					}
-					if ($key=='stream_motion') {
-						fputs($fp,'webcam_motion '.trim($value));
+				switch($key){
+					case 'createtime':
+						break;
+					case 'updatetime':
+						break;
+					case 'plugin':
+						break;
+					case 'camera':
+						break;
+					case 'cameraUrl':
+						break;
+					case 'cameraLogin':
+						break;
+					case 'cameraPass':
+						break;
+					case 'analyse':
+						break;
+					case 'cameraMotionPort':
+						break;
+					case 'cameraUSB':
+						break;
+					case 'cameraType':
+						break;
+					case 'previousIsEnable':
+						break;
+					case 'previousIsVisible':
+						break;
+					default :
+						if ($key=='stream_motion' || $key=='stream_localhost'|| $key=='netcam_tolerant_check'|| $key=='auto_brightness'|| $key=='switchfilter'|| $key=='noise_tune'|| $key=='emulate_motion'|| $key=='output_debug_pictures'|| $key=='ffmpeg_output_movies'|| $key=='ffmpeg_output_debug_movies'|| $key=='ffmpeg_deinterlace'|| $key=='locate_motion_mode'|| $key=='text_changes'|| $key=='text_double'|| $key=='ipv6_enabled'){
+							if($value==0)
+								$value='off';
+							else
+								$value='on';
+						}
+						fputs($fp,$key.' '.trim($value));
 						fputs($fp, "\n");
-					}
-					if ($key=='stream_port'){
-						fputs($fp,'webcam_port '.trim($value));
-						fputs($fp, "\n");
-					}
-					if ($key=='stream_localhost'){
-						fputs($fp,'webcam_localhost '.trim($value));
-						fputs($fp, "\n");
-					}
-					if ($key=='stream_quality'){
-						fputs($fp,'webcam_quality '.trim($value));
-						fputs($fp, "\n");
-					}
-					if ($key=='stream_maxrate'){
-						fputs($fp,'webcam_maxrate '.trim($value));
-						fputs($fp, "\n");
-					}
-					fputs($fp,$key.' '.trim($value));
-					fputs($fp, "\n");
+						break;
 				}
 			}
 			fclose($fp);
