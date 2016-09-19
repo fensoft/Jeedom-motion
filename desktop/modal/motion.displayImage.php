@@ -4,7 +4,8 @@ if (!isConnect()) {
 }
 //echo init('src');
 if(strpos(init('src'),'.avi')>0){
- 	 exec('sudo rm '.$dir.'video.mp4');
+	$dir=dirname(__FILE__) . '/../../../../tmp/';
+ 	exec('sudo rm '.$dir.'video.mp4');
 	exec('sudo rm '.$dir.'video.ogv');
 	exec('sudo rm '.$dir.'video.webm');
 	exec('sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$dir.'video.mp4');
@@ -16,7 +17,6 @@ if(strpos(init('src'),'.avi')>0){
 	  <source src="'.$dir.'video.webm" type="video/webm" />
 	  <source src="'.$dir.'video.ogv" type="video/ogg" />
 	</video></center>';
-	$dir=dirname(__FILE__) . '/../../../../tmp/';
 }
 else
 echo '<center><img class="img-responsive" src="' . init('src') . '" /></center>';
