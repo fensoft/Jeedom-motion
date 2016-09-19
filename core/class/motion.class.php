@@ -224,85 +224,6 @@ class motion extends eqLogic {
 	//                                                        Configuration de motion                                                                // 
 	//                                                                                                                                               //
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public static function MotionConfiguration() {
-		$Host=config::byKey('Host', 'motion');
-		$Port=config::byKey('Port', 'motion');	
-		$MotionService = new MotionService($Host,$Port);
-		$MotionService->setParam(0, 'control_port',config::byKey('Port', 'motion'));
-		$MotionService->setParam(0, 'videodevice', '');
-		$MotionService->setParam(0, 'netcam_userpass', '');
-		$MotionService->setParam(0, 'netcam_proxy', '');
-		$MotionService->setParam(0, 'netcam_url', '');
-		$MotionService->write(0);
-    }
-	/*public static function CameraConfiguration($MotionCamera,$MotionService,$IdMotionCamera) {	
-		$MotionService->setParam($IdMotionCamera, 'text_left', urlencode($MotionCamera->getName()));
-		$MotionService->setParam($IdMotionCamera, 'target_dir',urlencode(dirname(__FILE__).'/../../../../tmp/Motion/'.$MotionCamera->getId()));
-		$adress=network::getNetworkAccess('internal').'/plugins/motion/core/php/detect.php';
-		$MotionService->setParam($IdMotionCamera, 'on_event_end',urlencode( 'curl -v --header "Connection: keep-alive" "' . $adress.'?id='.$MotionCamera->getId().'&state=0&width=%i&height=%J&X=%K&Y=%L"'));
-		//Definition du parametre area_detect
-		$AreaDetect='';
-		foreach ($MotionCamera->getCmd() as $Commande)
-		{
-			if ($Commande->getLogicalId() =='detect')
-				$AreaDetect.=$Commande->getConfiguration('area') ;
-		}
-		if ($AreaDetect!='')
-		{
-			$MotionService->setParam($IdMotionCamera, 'area_detect',$AreaDetect);
-			$MotionService->setParam($IdMotionCamera, 'on_event_start','');
-			$MotionService->setParam($IdMotionCamera, 'on_area_detected',urlencode( 'curl -v --header "Connection: keep-alive" "' . $adress.'?id='.$MotionCamera->getId().'&state=1&width=%i&height=%J&X=%K&Y=%L"'));
-		}
-		else
-		{
-			$MotionService->setParam($IdMotionCamera, 'area_detect','');
-			$MotionService->setParam($IdMotionCamera, 'on_area_detected','');
-			$MotionService->setParam($IdMotionCamera, 'on_event_start',urlencode( 'curl -v --header "Connection: keep-alive" "' . $adress.'?id='.$MotionCamera->getId().'&state=1&width=%i&height=%J&X=%K&Y=%L"'));
-		}
-		$MotionService->setParam($IdMotionCamera, 'netcam_http', '1.1');
-		switch ($MotionCamera->getConfiguration('cameraType'))
-		{
-			case 'ip':
-				$MotionService->setParam($IdMotionCamera, 'netcam_url', urlencode(trim($MotionCamera->getConfiguration('cameraUrl'))));
-				$MotionService->setParam($IdMotionCamera, 'netcam_proxy', '');
-				if($MotionCamera->getConfiguration('cameraLogin')!='' || $MotionCamera->getConfiguration('cameraPass')!='')
-					$MotionService->setParam($IdMotionCamera, 'netcam_userpass', urlencode(trim($MotionCamera->getConfiguration('cameraLogin').':'.$MotionCamera->getConfiguration('cameraPass'))));
-				else
-					$MotionService->setParam($IdMotionCamera, 'netcam_userpass', '');
-				$MotionService->setParam($IdMotionCamera, 'videodevice', '');
-			break;
-			case 'usb':
-					$MotionService->setParam($IdMotionCamera, 'videodevice', urlencode(trim($MotionCamera->getConfiguration('cameraUSB'))));
-					$MotionService->setParam($IdMotionCamera, 'netcam_userpass', '');
-					$MotionService->setParam($IdMotionCamera, 'netcam_proxy', '');
-					$MotionService->setParam($IdMotionCamera, 'netcam_url', '');
-			break;
-		}
-		$CameraComnfiguration=$MotionCamera->getConfiguration();
-		foreach($CameraComnfiguration as $key => $value)
-		{
-			if ($key!='createtime' && $key!='updatetime' && $key!='plugin' && $key!='camera'&& $key!='cameraUrl' && $key!='cameraLogin' && $key!='cameraPass' && $key!='analyse' && $key!='cameraMotionPort' && $key!='cameraUSB' && $key!='cameraType'){
-				if ($key=='stream_motion' || $key=='stream_localhost'|| $key=='netcam_tolerant_check'|| $key=='auto_brightness'|| $key=='switchfilter'|| $key=='noise_tune'|| $key=='emulate_motion'|| $key=='output_debug_pictures'|| $key=='ffmpeg_output_movies'|| $key=='ffmpeg_output_debug_movies'|| $key=='ffmpeg_deinterlace'|| $key=='locate_motion_mode'|| $key=='text_changes'|| $key=='text_double'|| $key=='ipv6_enabled'){
-					if($value==0)
-						$value='off';
-					else
-						$value='on';
-				}
-				if ($key=='stream_motion') 
-					$MotionService->setParam($IdMotionCamera,'webcam_motion',urlencode(trim($value)));
-				if ($key=='stream_port')
-					$MotionService->setParam($IdMotionCamera,'webcam_port',urlencode(trim($value)));
-				if ($key=='stream_localhost')
-					$MotionService->setParam($IdMotionCamera,'webcam_localhost',urlencode(trim($value)));
-				if ($key=='stream_quality')
-					$MotionService->setParam($IdMotionCamera,'webcam_quality',urlencode(trim($value)));
-				if ($key=='stream_maxrate')
-					$MotionService->setParam($IdMotionCamera,'webcam_maxrate',urlencode(trim($value)));
-				$MotionService->setParam($IdMotionCamera,$key,urlencode(trim($value)));
-			}
-		}
-		$MotionService->write($IdMotionCamera);
-    }*/
 	public static function UpdateMotionConf() {
 		$file='/etc/motion/motion.conf';
 		$Camera=eqLogic::byLogicalId('/etc/motion/motion.conf','motion',false);
@@ -436,10 +357,7 @@ class motion extends eqLogic {
 		}
 		self::WriteThread($Camera,$file);
 		self::UpdateMotionConf();
-		$Host=config::byKey('Host', 'motion');
-		$Port=config::byKey('Port', 'motion');
-		$MotionService = new MotionService($Host,$Port);
-		$MotionService->Restart(0);
+		self::deamon_start();
 	}
 	public static function RemoveThread($Camera) {
 		$file=$Camera->getLogicalId();
@@ -451,10 +369,7 @@ class motion extends eqLogic {
 			$equipement->save();
 		}
 		self::UpdateMotionConf();
-		$Host=config::byKey('Host', 'motion');
-		$Port=config::byKey('Port', 'motion');
-		$MotionService = new MotionService($Host,$Port);
-		$MotionService->Restart(0);
+		self::deamon_start();
 	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//                                                                                                                                               //
@@ -619,13 +534,12 @@ class motion extends eqLogic {
 		$return['launchable'] = 'ok';
 		return $return;
 	}
-	public static function deamon_start($_debug = false) {	
+	public static function deamon_start($_debug = false) {
+		self::deamon_stop();	
 		$deamon_info = self::deamon_info();
 		if ($deamon_info['launchable'] != 'ok') 
 			throw new Exception(__('Veuillez vérifier la configuration', __FILE__));
-		sleep(1);
 		if ($deamon_info['state'] != 'ok') {
-			self::deamon_stop();
 			log::remove('motion');
 			$file='/etc/motion/motion.log';
 			if(!file_exists($file)){
