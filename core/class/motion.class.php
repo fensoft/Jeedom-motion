@@ -352,16 +352,7 @@ class motion extends eqLogic {
 		if($fp = fopen($file,"w+")){
 			fputs($fp, 'text_left '.$Camera->getName());
 			fputs($fp, "\n");
-			$directory=config::byKey('SnapshotFolder','motion');
-			if(substr($directory,-1)!='/')
-				$directory.='/';
-			$directory.=$Camera->getId().'/';
-			if(!file_exists($directory)){
-				exec('sudo mkdir -p '.$directory);
-				exec('sudo chmod 777 -R '.$directory);
-			}
-			$directory = calculPath($directory);
-			fputs($fp, 'target_dir '.$directory);
+			fputs($fp, 'target_dir '.$Camera->getSnapshotDiretory(true));
 			fputs($fp, "\n");
 			$adress=network::getNetworkAccess('internal').'/plugins/motion/core/php/detect.php';
 			fputs($fp, 'on_event_end curl -v --header "Connection: keep-alive" "' . $adress.'?id='.$Camera->getId().'&state=0&width=%i&height=%J&X=%K&Y=%L"');
@@ -499,7 +490,28 @@ class motion extends eqLogic {
 		if (!$fp = curl_init($url)) return false;
 		return true;
 	}
+	public function getSnapshotDiretory($Snapshot=false) {
+		$directory=config::byKey('SnapshotFolder','motion');
+		if(!file_exists($directory)){
+			exec('sudo mkdir -p '.$directory);
+			exec('sudo chmod 777 -R '.$directory);
+		}
+		if(substr($directory,-1)!='/')
+			$directory.='/';
+		if($Snapshot){
+			$directory.=$this->getEqLogic->getId().'/';
+			if(!file_exists($directory)){
+				exec('sudo mkdir -p '.$directory);
+				exec('sudo chmod 777 -R '.$directory);
+			}
+		}
+		$directory = calculPath($directory);
+			if (!is_writable($directory)) 
+				exec('sudo chmod 777 -R '.$directory);
+		return $directory;
+	}
 	public function getSnapshot() {
+		$directory=$this->getSnapshotDiretory();
 		$url=$this->getUrl();
 		if (!self::url_exists($url))
 			return 'plugins/motion/core/template/icones/no-image-blanc.png';
@@ -515,14 +527,6 @@ class motion extends eqLogic {
 			fclose($f);
 			$data=substr($data,strpos($data,"\r\n\r\n")+4);
 			$data=trim(substr($data,0,stripos($data,"--myboundary")-2));
-			$directory=config::byKey('SnapshotFolder','motion');
-			if(!file_exists($directory)){
-				exec('sudo mkdir -p '.$directory);
-				exec('sudo chmod 777 -R '.$directory);
-			}
-			if(substr($directory,-1)!='/')
-				$directory.='/';
-			$directory = calculPath($directory);
 			$output_file = $this->getName();
 			$output_file = htmlentities($output_file, ENT_NOQUOTES, 'utf-8');
 			$output_file = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $output_file);
@@ -530,8 +534,8 @@ class motion extends eqLogic {
 			$output_file = preg_replace('#&[^;]+;#', '', $output_file); // supprime les autres caractères
 			$output_file = strtolower($output_file);
 			$output_file .= '.jpg';
-			if (!is_writable($directory)) 
-				exec('sudo chmod 777 -R '.$directory);
+			if(file_existe($directory.$output_file))
+				exec('sudo rm '.$directory.$output_file);
 			if (empty($data))
 				return 'plugins/motion/core/template/icones/no-image-blanc.png';
 			file_put_contents($directory. $output_file, $data);
@@ -548,21 +552,24 @@ class motion extends eqLogic {
 		return 'plugins/motion/core/template/icones/no-image-blanc.png';
 	}	
 	public static function CleanFolder($CameraId) {
-		$directory=config::byKey('SnapshotFolder','motion'). $CameraId;
-		if(!file_exists($directory)){
-			exec('sudo mkdir -p '.$directory);
-			exec('sudo chmod 777 -R '.$directory);
-		}
-		$size = 0;
-		foreach(scandir($directory, 1) as $file) {
-			if(is_file($directory.$file) && $file != '.' && $file != '..'  && $file != 'lastsnap.jpg') {	
-				if ($size>= config::byKey('SnapshotFolderSeize', 'motion')*1000000) //Valeur SnapshotFolderSeize en megaoctet
-					self::removeRecord($directory.$file);
-				else
-					$size += filesize($directory.$file);
+		$Camera=eqLogic::byId($CameraId);
+		if(is_object($Camera)){
+			$directory=$Camera->getSnapshotDiretory();
+			if(!file_exists($directory)){
+				exec('sudo mkdir -p '.$directory);
+				exec('sudo chmod 777 -R '.$directory);
 			}
+			$size = 0;
+			foreach(scandir($directory, 1) as $file) {
+				if(is_file($directory.$file) && $file != '.' && $file != '..'  && $file != 'lastsnap.jpg') {	
+					if ($size>= config::byKey('SnapshotFolderSeize', 'motion')*1000000) //Valeur SnapshotFolderSeize en megaoctet
+						self::removeRecord($directory.$file);
+					else
+						$size += filesize($directory.$file);
+				}
+			}
+			log::add('motion','debug','Le dossier '.$directory.' est a '.$size);
 		}
-		log::add('motion','debug','Le dossier '.$directory.' est a '.$size);
 	}
 	public static function removeRecord($file) {
 		exec('sudo rm '. $file.' > /dev/null 2>/dev/null &');
@@ -644,15 +651,7 @@ class motionCmd extends cmd {
 		}
 	}
 	public function execute($_options = array()) {
-		$directory=config::byKey('SnapshotFolder','motion');
-		if(substr($directory,-1)!='/')
-			$directory.='/';
-		$directory.=$this->getEqLogic->getId().'/';
-		if(!file_exists($directory)){
-			exec('sudo mkdir -p '.$directory);
-			exec('sudo chmod 777 -R '.$directory);
-		}
-		$directory = calculPath($directory);
+		$directory=$this->getEqLogic()->getSnapshotDiretory(true);
 		$Host=config::byKey('Host', 'motion');
 		$Port=config::byKey('Port', 'motion');	
 		log::add('motion','debug','Connexion au motion '.$Host.':'.$Port);
