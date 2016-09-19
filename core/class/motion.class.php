@@ -449,7 +449,7 @@ class motion extends eqLogic {
 			$output_file = preg_replace('#&[^;]+;#', '', $output_file); // supprime les autres caractères
 			$output_file = strtolower($output_file);
 			$output_file .= '.jpg';
-			if(file_existe($directory.$output_file))
+			if(file_exists($directory.$output_file))
 				exec('sudo rm '.$directory.$output_file);
 			if (empty($data))
 				return 'plugins/motion/core/template/icones/no-image-blanc.png';
