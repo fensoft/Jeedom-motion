@@ -306,41 +306,45 @@ class motion extends eqLogic {
 			foreach($Camera->getConfiguration() as $key => $value)	{
 				switch($key){
 					case 'createtime':
-						break;
 					case 'updatetime':
-						break;
 					case 'plugin':
-						break;
 					case 'camera':
-						break;
 					case 'cameraUrl':
-						break;
 					case 'cameraLogin':
-						break;
 					case 'cameraPass':
-						break;
 					case 'analyse':
-						break;
 					case 'cameraMotionPort':
-						break;
 					case 'cameraUSB':
-						break;
 					case 'cameraType':
-						break;
 					case 'previousIsEnable':
-						break;
 					case 'previousIsVisible':
-						break;
-					default :
-						if ($key=='stream_motion' || $key=='stream_localhost'|| $key=='netcam_tolerant_check'|| $key=='auto_brightness'|| $key=='switchfilter'|| $key=='noise_tune'|| $key=='emulate_motion'|| $key=='output_debug_pictures'|| $key=='ffmpeg_output_movies'|| $key=='ffmpeg_output_debug_movies'|| $key=='ffmpeg_deinterlace'|| $key=='locate_motion_mode'|| $key=='text_changes'|| $key=='text_double'|| $key=='ipv6_enabled'){
-							if($value==0)
-								$value='off';
-							else
-								$value='on';
-						}
+					break;
+					case 'stream_motion':
+					case 'stream_localhost':
+					case 'netcam_tolerant_check':
+					case 'auto_brightness':
+					case 'switchfilter':
+					case 'noise_tune':
+					case 'emulate_motion':
+					case 'output_debug_pictures':
+					case 'ffmpeg_output_movies':
+					case 'ffmpeg_output_debug_movies':
+					case 'ffmpeg_deinterlace':
+					case 'locate_motion_mode':
+					case 'text_changes':
+					case 'text_double':
+					case 'ipv6_enabled':
+						if($value==0)
+							$value='off';
+						else
+							$value='on';
 						fputs($fp,$key.' '.trim($value));
 						fputs($fp, "\n");
-						break;
+					break;
+					default:
+						fputs($fp,$key.' '.trim($value));
+						fputs($fp, "\n");
+					break;
 				}
 			}
 			fclose($fp);
