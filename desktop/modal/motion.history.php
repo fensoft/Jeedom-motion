@@ -12,7 +12,7 @@ if (!is_object($camera)) {
 if ($camera->getEqType_name() != 'motion') {
 	throw new Exception(__('Cet équipement n\'est pas de type motion : ', __FILE__) . $camera->getEqType_name());
 }
-$directory=$camera->getSnapshotDiretory();
+$directory=$camera->getSnapshotDiretory(true);
 $url=dirname(__FILE__);
 if(substr($url,-1)!='/')
 	$url.='/';
