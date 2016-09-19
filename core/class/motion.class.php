@@ -430,7 +430,7 @@ class motion extends eqLogic {
 		$url=$this->getUrl();
 		if (!self::url_exists($url))
 			return 'plugins/motion/core/template/icones/no-image-blanc.png';
-		if(!$f=fopen($url,"r")){
+		if(!$f=@fopen($url,"r")){
 			return 'plugins/motion/core/template/icones/no-image-blanc.png';
 		}
 		else {
