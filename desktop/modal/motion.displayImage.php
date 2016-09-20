@@ -11,14 +11,14 @@ if(strpos(init('src'),'.avi')>0){
 		exec('sudo rm '.$dir.'video.ogv');
 	if(file_exists($dir.'video.webm'))
 		exec('sudo rm '.$dir.'video.webm');
-	//exec('sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$dir.'video.mp4 1> '.$dir.'block.txt 2>&1');
+	exec('sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$dir.'video.mp4 1>'.$dir.'block.txt 2>&1');
 	//exec('sudo ffmpeg -i '.init('src').' -vcodec libtheora '.$dir.'video.ogv');
 	//exec('sudo ffmpeg -i '.init('src').'  -b 1000k '.$dir.'video.webm');
 ?>
 <script>
 	var _progress = function(i){
 		i++;
-		var logfile = 'block.txt';
+		var logfile = '<php echo $dir."block.txt";';
 		request.post(logfile).then( function(content){
 			// AJAX success
 			var duration = 0, time = 0, progress = 0;
