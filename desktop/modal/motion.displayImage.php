@@ -11,11 +11,13 @@ if(strpos(init('src'),'.avi')>0){
 		exec('sudo rm '.$dir.'video.ogv');
 	if(file_exists($dir.'video.webm'))
 		exec('sudo rm '.$dir.'video.webm');
-	shell_exec('sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$dir.'video.mp4 1>'.$dir.'block.txt 2>&1');
+	shell_exec('sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$dir.'video.mp4 1> '.$dir.'block.txt 2>&1');
 	//exec('sudo ffmpeg -i '.init('src').' -vcodec libtheora '.$dir.'video.ogv');
 	//exec('sudo ffmpeg -i '.init('src').'  -b 1000k '.$dir.'video.webm');
 ?>
 <script>
+	$('video').hide();
+	$('progress').show();
 	var _progress = function(i){
 		i++;
 		var logfile = '<php echo $dir."block.txt";';
@@ -79,8 +81,8 @@ if(strpos(init('src'),'.avi')>0){
 					$('progress').hide();
 				}
 			} else if( content.indexOf('Permission denied') > -1) {
-			// TODO - err - ffmpeg is not executable ...
-			console.log('{"status":-400, "error":"ffmpeg : Permission denied, either for ffmpeg or upload location ..." }');    
+				// TODO - err - ffmpeg is not executable ...
+				console.log('{"status":-400, "error":"ffmpeg : Permission denied, either for ffmpeg or upload location ..." }');    
 			} 
 		},
 		function(err){
@@ -97,7 +99,7 @@ if(strpos(init('src'),'.avi')>0){
 	setTimeout(function(){ _progress(0); }, 800);
 </script>
 <center>
-	<progress max="100"></progress>
+	<progress value="0" max="100"></progress>
 	<video width="400" height="222" controls autoplay>
 		<source src="'.$dir.'video.mp4" type="video/mp4" />
 		<source src="'.$dir.'video.webm" type="video/webm" />
