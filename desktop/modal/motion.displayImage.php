@@ -71,7 +71,12 @@ if(strpos(init('src'),'.avi')>0){
 					console.log('{"status":-400, "error":"there is no progress while we tried to encode the video" }'); 
 					return;
 				} else if(progress<100){ 
+					$('video').hide();
+					$('progress').show();
 					setTimeout(function(){ _progress(i); }, 400);
+				}else if(progress>100){ 
+					$('video').show();
+					$('progress').hide();
 				}
 			} else if( content.indexOf('Permission denied') > -1) {
 			// TODO - err - ffmpeg is not executable ...
