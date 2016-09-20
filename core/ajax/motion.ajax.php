@@ -1,21 +1,4 @@
 <?php
-
-/* This file is part of Jeedom.
- *
- * Jeedom is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Jeedom is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
- */
-
 try {
     require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
     include_file('core', 'authentification', 'php');
@@ -106,8 +89,59 @@ try {
 		exec('sudo rm /etc/motion/motion.log > /dev/null 2>/dev/null &');
 		ajax::success("Suppression faite");
 	}
-
-    throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
+	if (init('action') == 'getVideoConvertionStat') {
+		$dir=dirname(__FILE__) . '/../../../../tmp/';
+		if(file_exists($dir.'video.mp4'))
+	 		exec('sudo rm '.$dir.'video.mp4');
+		if(file_exists($dir.'video.ogv'))
+			exec('sudo rm '.$dir.'video.ogv');
+		if(file_exists($dir.'video.webm'))
+			exec('sudo rm '.$dir.'video.webm');
+		shell_exec('sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$dir.'video.mp4 1> '.$dir.'block.txt 2>&1 > /dev/null 2>/dev/null &');
+		//exec('sudo ffmpeg -i '.init('src').' -vcodec libtheora '.$dir.'video.ogv');
+		//exec('sudo ffmpeg -i '.init('src').'  -b 1000k '.$dir.'video.webm');
+		$duration = 0;
+		$time = 0;
+		$progress = 0;
+		$result = array();
+		if(!$log=@fopen(init('logfile'),"r")){
+			ajax::error('Impossible d\'ouvrir le fichier : '.init('logfile'));
+		}
+		else {
+			$content=fgets($log);
+			preg_match('/Duration: (.*?), start:/',$content,$matches) ;
+			if(count($matches)>0 ){
+				$rawDuration = $matches[1];
+				// convert rawDuration from 00:00:00.00 to seconds.
+				$ar = array_reverse(explode(":",$rawDuration));
+				$duration = floatval($ar[0]);
+				if ($ar[1]) $duration += intval($ar[1]) * 60;
+				if ($ar[2]) $duration += intval($ar[2]) * 60 * 60;
+				
+				// get the time 
+			
+				preg_match('/time=(.*?) bitrate/g',$content,$matches) ;
+				if(count($matches)>0 ){
+					$rawTime = array_pop($matches);
+					$rawTime = str_replace('time=','',$rawTime);
+					$rawTime = str_replace(' bitrate','',$rawTime);
+					
+					// convert rawTime from 00:00:00.00 to seconds.
+					$ar = array_reverse(explode(":",$rawTime));
+					$time = floatval($ar[0]);
+					if ($ar[1])$time += intval($ar[1]) * 60;
+					if ($ar[2]) $time += intval($ar[2]) * 60 * 60;
+					
+					//calculate the progress
+					$progress = round(($time/$duration) * 100);
+				}
+				$result['duration'] = $duration;
+				$result['current']  = $time;
+				$result['progress'] = $progress;
+			}
+			ajax::success($result);
+		}	
+	throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
     /*     * *********Catch exeption*************** */
 } catch (Exception $e) {
     ajax::error(displayExeption($e), $e->getCode());
