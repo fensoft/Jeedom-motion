@@ -89,7 +89,7 @@
 			$result['duration'] = 0;
 			$result['time'] = 0;
 			$result['progress'] = 0;
-			$result['video']=.$dir.'video.mp4';
+			$result['video']=$dir.'video.mp4';
 			$result['videoType']="video/mp4";
 			$dir=dirname(__FILE__) . '/../../../../tmp/';
 			if(file_exists($result['video']))
