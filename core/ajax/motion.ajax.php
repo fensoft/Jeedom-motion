@@ -85,21 +85,22 @@
 			ajax::success("Suppression faite");
 		}
 		if (init('action') == 'getVideoConvertionStat') {
-			$duration = 0;
-			$time = 0;
-			$progress = 0;
 			$result = array();
+			$result['duration'] = 0;
+			$result['time'] = 0;
+			$result['progress'] = 0;
 			$result['video']=.$dir.'video.mp4';
 			$result['videoType']="video/mp4";
 			$dir=dirname(__FILE__) . '/../../../../tmp/';
 			if(file_exists($result['video']))
 				exec('sudo rm '.$result['video']);
-		
-			shell_exec('sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$result['video'].' 1> '.$dir.'block.txt 2>&1 > /dev/null 2>/dev/null &');
+			$LogFile=$dir.'convert.txt';
+			if(file_exists($LogFile))
+				shell_exec('sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$result['video'].' 1> '.$LogFile.' 2>&1 > /dev/null 2>/dev/null &');
 			//exec('sudo ffmpeg -i '.init('src').' -vcodec libtheora '.$dir.'video.ogv');
 			//exec('sudo ffmpeg -i '.init('src').'  -b 1000k '.$dir.'video.webm');
-			if(!$log=@fopen($dir.'block.txt',"r")){
-				ajax::error('Impossible d\'ouvrir le fichier : '.$dir.'block.txt');
+			if(!$log=@fopen($LogFile,"r")){
+				ajax::error('Impossible d\'ouvrir le fichier : '.$LogFile);
 			}
 			else {
 				$content=fgets($log);
@@ -108,9 +109,9 @@
 					$rawDuration = $matches[1];
 					// convert rawDuration from 00:00:00.00 to seconds.
 					$ar = array_reverse(explode(":",$rawDuration));
-					$duration = floatval($ar[0]);
-					if ($ar[1]) $duration += intval($ar[1]) * 60;
-					if ($ar[2]) $duration += intval($ar[2]) * 60 * 60;
+					$result['duration'] = floatval($ar[0]);
+					if ($ar[1]) $result['duration'] += intval($ar[1]) * 60;
+					if ($ar[2]) $result['duration'] += intval($ar[2]) * 60 * 60;
 					
 					// get the time 
 					
@@ -122,16 +123,15 @@
 						
 						// convert rawTime from 00:00:00.00 to seconds.
 						$ar = array_reverse(explode(":",$rawTime));
-						$time = floatval($ar[0]);
-						if ($ar[1])$time += intval($ar[1]) * 60;
-						if ($ar[2]) $time += intval($ar[2]) * 60 * 60;
+						$result['time'] = floatval($ar[0]);
+						if ($ar[1]) $result['time'] += intval($ar[1]) * 60;
+						if ($ar[2]) $result['time'] += intval($ar[2]) * 60 * 60;
 						
 						//calculate the progress
-						$progress = round(($time/$duration) * 100);
+						$result['progress'] = round(($result['time']/$result['duration']) * 100);
 					}
-					$result['duration'] = $duration;
-					$result['current']  = $time;
-					$result['progress'] = $progress;
+					if($result['progress'] == 100)
+						exec('sudo rm '.$LogFile);
 				}
 				ajax::success($result);
 			}
