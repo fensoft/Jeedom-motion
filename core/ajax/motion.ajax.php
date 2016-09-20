@@ -85,20 +85,19 @@
 			ajax::success("Suppression faite");
 		}
 		if (init('action') == 'getVideoConvertionStat') {
-			$dir=dirname(__FILE__) . '/../../../../tmp/';
-			if(file_exists($dir.'video.mp4'))
-				exec('sudo rm '.$dir.'video.mp4');
-			if(file_exists($dir.'video.ogv'))
-				exec('sudo rm '.$dir.'video.ogv');
-			if(file_exists($dir.'video.webm'))
-				exec('sudo rm '.$dir.'video.webm');
-			shell_exec('sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$dir.'video.mp4 1> '.$dir.'block.txt 2>&1 > /dev/null 2>/dev/null &');
-			//exec('sudo ffmpeg -i '.init('src').' -vcodec libtheora '.$dir.'video.ogv');
-			//exec('sudo ffmpeg -i '.init('src').'  -b 1000k '.$dir.'video.webm');
 			$duration = 0;
 			$time = 0;
 			$progress = 0;
 			$result = array();
+			$result['video']=.$dir.'video.mp4';
+			$result['videoType']="video/mp4";
+			$dir=dirname(__FILE__) . '/../../../../tmp/';
+			if(file_exists($result['video']))
+				exec('sudo rm '.$result['video']);
+		
+			shell_exec('sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$result['video'].' 1> '.$dir.'block.txt 2>&1 > /dev/null 2>/dev/null &');
+			//exec('sudo ffmpeg -i '.init('src').' -vcodec libtheora '.$dir.'video.ogv');
+			//exec('sudo ffmpeg -i '.init('src').'  -b 1000k '.$dir.'video.webm');
 			if(!$log=@fopen($dir.'block.txt',"r")){
 				ajax::error('Impossible d\'ouvrir le fichier : '.$dir.'block.txt');
 			}
