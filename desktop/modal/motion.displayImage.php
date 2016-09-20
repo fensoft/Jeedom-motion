@@ -11,7 +11,7 @@ if(strpos(init('src'),'.avi')>0){
 		exec('sudo rm '.$dir.'video.ogv');
 	if(file_exists($dir.'video.webm'))
 		exec('sudo rm '.$dir.'video.webm');
-	exec('sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$dir.'video.mp4 1> '.$dir.'block.txt 2>&1');
+	//exec('sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$dir.'video.mp4 1> '.$dir.'block.txt 2>&1');
 	//exec('sudo ffmpeg -i '.init('src').' -vcodec libtheora '.$dir.'video.ogv');
 	//exec('sudo ffmpeg -i '.init('src').'  -b 1000k '.$dir.'video.webm');
 ?>
