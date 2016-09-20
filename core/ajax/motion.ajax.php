@@ -104,8 +104,8 @@ try {
 		$time = 0;
 		$progress = 0;
 		$result = array();
-		if(!$log=@fopen(init('logfile'),"r")){
-			ajax::error('Impossible d\'ouvrir le fichier : '.init('logfile'));
+		if(!$log=@fopen($dir.'block.txt,"r")){
+			ajax::error('Impossible d\'ouvrir le fichier : '.$dir.'block.txt');
 		}
 		else {
 			$content=fgets($log);
