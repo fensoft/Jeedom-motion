@@ -19,7 +19,7 @@ if(strpos(init('src'),'.avi')>0){
 	var _progress = function(i){
 	    i++;
 	    // THIS MUST BE THE PATH OF THE .txt FILE SPECIFIED IN [1] : 
-	    var logfile = $dir.'block.txt;
+	    var logfile = '<?php echo $dir.'block.txt;?>';
 	
 	/* (example requires dojo) */
 	
