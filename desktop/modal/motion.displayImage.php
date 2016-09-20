@@ -34,6 +34,9 @@ if(strpos(init('src'),'.avi')>0){
 					$('video').show();
 					$('progress').hide();
 					clearTimeout(timeoutConvertion);
+					$('video ').append($('source')
+						.attr('src',data.result.video)
+						.attr('type',data.result.videoType));
 				}
 				 timeoutConvertion = setTimeout(getVideoConvertionStat, 1000);
 			}
@@ -42,11 +45,7 @@ if(strpos(init('src'),'.avi')>0){
 </script>
 <center>
 	<progress value="0" max="100"></progress>
-	<video width="400" height="222" controls autoplay>
-		<source src="'.$dir.'video.mp4" type="video/mp4" />
-		<source src="'.$dir.'video.webm" type="video/webm" />
-		<source src="'.$dir.'video.ogv" type="video/ogg" />
-	</video>
+	<video width="400" height="222" controls autoplay></video>
 </center>
 <?php
 }
