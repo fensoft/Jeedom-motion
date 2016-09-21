@@ -110,10 +110,8 @@ class motion extends eqLogic {
 		$this->setConfiguration('timelapse_filename','%Y%m%d-timelapse');
 		$this->setConfiguration('ipv6_enabled',0);       
     }
-	public function preSave() {
-		self::NewThread($this);
-	}
 	public function postSave() {
+		self::NewThread($this);
 		self::AddCommande($this,__('Parcourir les video', __FILE__),'browseRecord',"info", 'binary');
 		self::AddCommande($this,'Détection','detect',"info", 'binary','','','Motion');
 		self::AddCommande($this,'Dernière photo prise','lastImg',"info", 'string','','Motion');
