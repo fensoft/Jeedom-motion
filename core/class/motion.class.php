@@ -109,10 +109,18 @@ class motion extends eqLogic {
 		$this->setConfiguration('movie_filename','%v-%Y%m%d%H%M%S');
 		$this->setConfiguration('timelapse_filename','%Y%m%d-timelapse');
 		$this->setConfiguration('ipv6_enabled',0);       
-    }
+    	}
 	public function postSave() {
-		self::NewThread($this);
-		if($this->getLogicalId() !=""){
+		if($this->getLogicalId()==''){
+			if(count(eqLogic::byLogicalId('/etc/motion/motion.conf','motion',true))==0)
+				$file='/etc/motion/motion.conf';
+			else
+				$file='/etc/motion/thread'.$Camera->getId().'.conf';
+			$this->setLogicalId($file);
+			$this->save();
+		}else{
+			self::NewThread($this);
+			self::AddCommande($this,__('Parcourir les video', __FILE__),'browseRecord',"info", 'binary');
 			self::AddCommande($this,'Détection','detect',"info", 'binary','','','Motion');
 			self::AddCommande($this,'Prendre une photo','snapshot',"action", 'other','<i class="fa fa-camera"></i>');
 			self::AddCommande($this,'Enregistrer une video','makemovie',"action", 'other','<i class="fa fa-circle"></i>');
@@ -350,18 +358,9 @@ class motion extends eqLogic {
 	}
 	public static function NewThread($Camera) {
 		$file=$Camera->getLogicalId();
-		if($file==''){
-			if(count(eqLogic::byLogicalId('/etc/motion/motion.conf','motion',true))==0)
-				$file='/etc/motion/motion.conf';
-			else
-				$file='/etc/motion/thread'.$Camera->getId().'.conf';
-			$Camera->setLogicalId($file);
-			$Camera->save();
-		} else {
-			self::WriteThread($Camera,$file);
-			self::UpdateMotionConf();
-			self::deamon_start();
-		}
+		self::WriteThread($Camera,$file);
+		self::UpdateMotionConf();
+		self::deamon_start();
 	}
 	public static function RemoveThread($Camera) {
 		$file=$Camera->getLogicalId();
