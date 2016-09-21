@@ -21,26 +21,14 @@ then
 	echo "Please do 'sudo -s' first"
 	exit 1
 fi
-echo "*****************************************************************************************************"
-echo "*                                Desinstallation des dépendance                                    *"
-echo "*****************************************************************************************************"
-sudo apt-get autoremove -y --force-yes  motion
-rm  /etc/motion/*
-echo "*****************************************************************************************************"
-echo "*                                          Installation de FFMPEG                                   *"
-echo "*****************************************************************************************************"
-echo 1 > /tmp/compilation_motion_in_progress
-test=$(grep '#http://www.deb-multimedia.org' /etc/apt/sources.list)
-if [ -z "$test" ] || [ $test = " " ] || [ $test = "" ]
-then 
-	echo "#http://www.deb-multimedia.org" | sudo tee -a /etc/apt/sources.list
-	echo "deb http://www.deb-multimedia.org jessie main non-free" | sudo tee -a /etc/apt/sources.list
-	echo "deb-src http://www.deb-multimedia.org jessie main non-free" | sudo tee -a /etc/apt/sources.list
-fi 
-sudo apt-get -y update
-sudo apt-get install-y --force-yes  deb-multimedia-keyring
-sudo apt-get -y update
-echo 2 > /tmp/compilation_motion_in_progress
+if [ -f "/etc/motion/" ]
+then
+	echo "*****************************************************************************************************"
+	echo "*                                Desinstallation des dépendance                                    *"
+	echo "*****************************************************************************************************"
+	sudo apt-get autoremove -y --force-yes  motion
+	rm -R /etc/motion/
+fi
 echo "*****************************************************************************************************"
 echo "*                                Installing additional libraries                                    *"
 echo "*****************************************************************************************************"
@@ -71,32 +59,30 @@ echo 15 > /tmp/compilation_motion_in_progress
 sudo apt-get install -y --force-yes ffmpeg
 echo 20 > /tmp/compilation_motion_in_progress
 echo "*****************************************************************************************************"
+echo "*                                          Installation de FFMPEG                                   *"
+echo "*****************************************************************************************************"
+test=$(grep '#http://www.deb-multimedia.org' /etc/apt/sources.list)
+if [ -z "$test" ] || [ $test = " " ] || [ $test = "" ]
+then 
+	echo "#http://www.deb-multimedia.org" | sudo tee -a /etc/apt/sources.list
+	echo "deb http://www.deb-multimedia.org jessie main non-free" | sudo tee -a /etc/apt/sources.list
+	echo "deb-src http://www.deb-multimedia.org jessie main non-free" | sudo tee -a /etc/apt/sources.list
+fi 
+echo 21 > /tmp/compilation_motion_in_progress
+sudo apt-get -y update
+echo 30 > /tmp/compilation_motion_in_progress
+sudo apt-get -y upgrade
+echo 40 > /tmp/compilation_motion_in_progress
+sudo apt-get install-y --force-yes  deb-multimedia-keyring
+echo 70 > /tmp/compilation_motion_in_progress
+echo "*****************************************************************************************************"
 echo "*                                          Compilation de motion:                                   *"
 echo "*****************************************************************************************************"
-sudo rm /etc/motion/*
 sudo apt-get install -y --force-yes motion
-echo 70 > /tmp/compilation_motion_in_progress
-#cd $TEMP_DIR
-#check_run wget -q $motion_url -O - | tar -zx
-#cd motion-3.2.12
-#./configure --without-mysql --without-pgsql 
-#make
-#sudo make install
-#echo "*****************************************************************************************************"
-#echo "*                                     Demarrage automatique                                         *"
-#echo "*****************************************************************************************************"
-#sudo tee /etc/default/motion <<- 'EOF'
-#start_motion_daemon=yes
-#EOF
-#echo 75 > /tmp/compilation_motion_in_progress
-echo "*****************************************************************************************************"
-echo "*                                     Configuration de motion                                       *"
-echo "*****************************************************************************************************"
-sudo rm /etc/motion/*
+echo 90 > /tmp/compilation_motion_in_progress
 sudo chmod -R 777 /etc/motion/
+echo 95 > /tmp/compilation_motion_in_progress
 sudo usermod -a -G motion www-data
-#echo 80 > /tmp/compilation_motion_in_progress
-#php /usr/share/nginx/www/jeedom/plugins/motion/core/php/UpdateMotionConf.php
 echo 100 > /tmp/compilation_motion_in_progress
 echo "*****************************************************************************************************"
 echo "*                                Installation de motion terminé                                     *"
