@@ -112,21 +112,23 @@ class motion extends eqLogic {
     }
 	public function postSave() {
 		self::NewThread($this);
-		self::AddCommande($this,__('Parcourir les video', __FILE__),'browseRecord',"info", 'binary');
-		self::AddCommande($this,'Détection','detect',"info", 'binary','','','Motion');
-		self::AddCommande($this,'Dernière photo prise','lastImg',"info", 'string','','Motion');
-		self::AddCommande($this,'Prendre une photo','snapshot',"action", 'other','<i class="fa fa-camera"></i>');
-		self::AddCommande($this,'Enregistrer une video','makemovie',"action", 'other','<i class="fa fa-circle"></i>');
-		$StatusDetection= self::AddCommande($this,'Status la détection','detectionstatus',"info", 'binary');
-		$CommandeDetection=self::AddCommande($this,'Activer la détection','detectionactif',"action", 'other');
-		$CommandeDetection->setValue($StatusDetection->getId());
-		$CommandeDetection->save();
-		$CommandeDetection=self::AddCommande($this,'Desactiver la détection','detectionpause',"action", 'other');
-		$CommandeDetection->setValue($StatusDetection->getId());
-		$CommandeDetection->save();
-		$CommandeDetection=self::AddCommande($this,'Activer/Desactiver la détection','detectionaction',"action", 'other','','MotionDetect');
-		$CommandeDetection->setValue($StatusDetection->getId());
-		$CommandeDetection->save();
+		if($this->getLogicalId() !=""){
+			self::AddCommande($this,__('Parcourir les video', __FILE__),'browseRecord',"info", 'binary');
+			self::AddCommande($this,'Détection','detect',"info", 'binary','','','Motion');
+			self::AddCommande($this,'Dernière photo prise','lastImg',"info", 'string','','Motion');
+			self::AddCommande($this,'Prendre une photo','snapshot',"action", 'other','<i class="fa fa-camera"></i>');
+			self::AddCommande($this,'Enregistrer une video','makemovie',"action", 'other','<i class="fa fa-circle"></i>');
+			$StatusDetection= self::AddCommande($this,'Status la détection','detectionstatus',"info", 'binary');
+			$CommandeDetection=self::AddCommande($this,'Activer la détection','detectionactif',"action", 'other');
+			$CommandeDetection->setValue($StatusDetection->getId());
+			$CommandeDetection->save();
+			$CommandeDetection=self::AddCommande($this,'Desactiver la détection','detectionpause',"action", 'other');
+			$CommandeDetection->setValue($StatusDetection->getId());
+			$CommandeDetection->save();
+			$CommandeDetection=self::AddCommande($this,'Activer/Desactiver la détection','detectionaction',"action", 'other','','MotionDetect');
+			$CommandeDetection->setValue($StatusDetection->getId());
+			$CommandeDetection->save();
+		}
     }
 	public function preRemove() {
 		self::RemoveThread($this);
