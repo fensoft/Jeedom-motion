@@ -113,7 +113,7 @@ class motion extends eqLogic {
 	public function postSave() {
 		self::NewThread($this);
 		if($this->getLogicalId() !=""){
-			self::AddCommande($this,__('Parcourir les video', __FILE__),'browseRecord',"info", 'binary');
+			self::AddCommande($this,'Parcourir les video','browseRecord',"info", 'binary');
 			self::AddCommande($this,'Détection','detect',"info", 'binary','','','Motion');
 			self::AddCommande($this,'Dernière photo prise','lastImg',"info", 'string','','Motion');
 			self::AddCommande($this,'Prendre une photo','snapshot',"action", 'other','<i class="fa fa-camera"></i>');
@@ -129,10 +129,10 @@ class motion extends eqLogic {
 			$CommandeDetection->setValue($StatusDetection->getId());
 			$CommandeDetection->save();
 		}
-    }
+    	}
 	public function preRemove() {
 		self::RemoveThread($this);
-    }
+    	}
  	public function toHtml($_version = 'dashboard') {
       
 		/*$replace = $this->preToHtml($_version);
@@ -359,10 +359,11 @@ class motion extends eqLogic {
 				$file='/etc/motion/thread'.$Camera->getId().'.conf';
 			$Camera->setLogicalId($file);
 			$Camera->save();
+		} else {
+			self::WriteThread($Camera,$file);
+			self::UpdateMotionConf();
+			self::deamon_start();
 		}
-		self::WriteThread($Camera,$file);
-		self::UpdateMotionConf();
-		self::deamon_start();
 	}
 	public static function RemoveThread($Camera) {
 		$file=$Camera->getLogicalId();
