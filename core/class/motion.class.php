@@ -115,7 +115,7 @@ class motion extends eqLogic {
 			if(count(eqLogic::byLogicalId('/etc/motion/motion.conf','motion',true))==0)
 				$file='/etc/motion/motion.conf';
 			else
-				$file='/etc/motion/thread'.$Camera->getId().'.conf';
+				$file='/etc/motion/thread'.$this->getId().'.conf';
 			$this->setLogicalId($file);
 			$this->save();
 		}else{
