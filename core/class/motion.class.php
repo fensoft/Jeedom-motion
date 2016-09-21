@@ -110,8 +110,10 @@ class motion extends eqLogic {
 		$this->setConfiguration('timelapse_filename','%Y%m%d-timelapse');
 		$this->setConfiguration('ipv6_enabled',0);       
     }
-	public function postSave() {
+	public function preSave() {
 		self::NewThread($this);
+	}
+	public function postSave() {
 		self::AddCommande($this,__('Parcourir les video', __FILE__),'browseRecord',"info", 'binary');
 		self::AddCommande($this,'Détection','detect',"info", 'binary','','','Motion');
 		self::AddCommande($this,'Dernière photo prise','lastImg',"info", 'string','','Motion');
@@ -210,7 +212,7 @@ class motion extends eqLogic {
 			$Commande->setType($Type);
 			$Commande->setSubType($SubType);
 		}
-     	$Commande->setTemplate('dashboard',$Template );
+     		$Commande->setTemplate('dashboard',$Template );
 		$Commande->setTemplate('mobile', $Template);
 		if ($icone!='')
 			$Commande->setDisplay('icon',$icone);
