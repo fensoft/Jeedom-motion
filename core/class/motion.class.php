@@ -113,9 +113,7 @@ class motion extends eqLogic {
 	public function postSave() {
 		self::NewThread($this);
 		if($this->getLogicalId() !=""){
-			self::AddCommande($this,'Parcourir les video','browseRecord',"info", 'binary');
 			self::AddCommande($this,'Détection','detect',"info", 'binary','','','Motion');
-			self::AddCommande($this,'Dernière photo prise','lastImg',"info", 'string','','Motion');
 			self::AddCommande($this,'Prendre une photo','snapshot',"action", 'other','<i class="fa fa-camera"></i>');
 			self::AddCommande($this,'Enregistrer une video','makemovie',"action", 'other','<i class="fa fa-circle"></i>');
 			$StatusDetection= self::AddCommande($this,'Status la détection','detectionstatus',"info", 'binary');
