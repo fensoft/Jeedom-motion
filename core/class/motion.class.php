@@ -358,8 +358,8 @@ class motion extends eqLogic {
 			else
 				$file='/etc/motion/thread'.$Camera->getId().'.conf';
 			$Camera->setLogicalId($file);
-			$Camera->save();
-			return;
+			//$Camera->save();
+			//return;
 		}
 		self::WriteThread($Camera,$file);
 		self::UpdateMotionConf();
