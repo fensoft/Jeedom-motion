@@ -95,7 +95,7 @@
 			if(file_exists($result['video']))
 				exec('sudo rm '.$result['video']);
 			$LogFile=$dir.'convert.txt';
-			if(file_exists($LogFile))
+			if(!file_exists($LogFile))
 				shell_exec('sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$result['video'].' 1> '.$LogFile.' 2>&1 > /dev/null 2>/dev/null &');
 			//exec('sudo ffmpeg -i '.init('src').' -vcodec libtheora '.$dir.'video.ogv');
 			//exec('sudo ffmpeg -i '.init('src').'  -b 1000k '.$dir.'video.webm');
