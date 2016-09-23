@@ -73,7 +73,11 @@ sudo apt-get -y update
 echo 30 > /tmp/compilation_motion_in_progress
 sudo apt-get -y upgrade
 echo 40 > /tmp/compilation_motion_in_progress
-sudo apt-get install-y --force-yes  deb-multimedia-keyring
+sudo apt-get install -y --force-yes  deb-multimedia-keyring
+echo 50 > /tmp/compilation_motion_in_progress
+sudo apt-get remove -y --force-yes ffmpeg
+echo 60 > /tmp/compilation_motion_in_progress
+sudo apt-get install -y --force-yes ffmpeg x264
 echo 70 > /tmp/compilation_motion_in_progress
 echo "*****************************************************************************************************"
 echo "*                                          Compilation de motion:                                   *"
