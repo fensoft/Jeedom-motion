@@ -10,7 +10,7 @@ if(strpos(init('src'),'.avi')>0){
 	$('progress').show();
 	getVideoConvertionStat("<php echo init('src');?>");
 	function getVideoConvertionStat(filename){
-		var timeoutConvertion = setTimeout(getVideoConvertionStat, 1000);
+		var timeoutConvertion = setTimeout(getVideoConvertionStat, 3000);
 	        $.ajax({// fonction permettant de faire de l'ajax
 			type: "POST", // methode de transmission des données au fichier php
 			url: "plugins/motion/core/ajax/motion.ajax.php", // url du fichier php
@@ -38,7 +38,7 @@ if(strpos(init('src'),'.avi')>0){
 						.attr('src',data.result.video)
 						.attr('type',data.result.videoType));
 				}
-				 timeoutConvertion = setTimeout(getVideoConvertionStat, 1000);
+				 timeoutConvertion = setTimeout(getVideoConvertionStat, 3000);
 			}
 		});
 	}
