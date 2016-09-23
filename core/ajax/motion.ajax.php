@@ -85,13 +85,13 @@
 			ajax::success("Suppression faite");
 		}
 		if (init('action') == 'getVideoConvertionStat') {
+			$dir=dirname(__FILE__) . '/../../../../tmp/';
 			$result = array();
 			$result['duration'] = 0;
 			$result['time'] = 0;
 			$result['progress'] = 0;
 			$result['video']=$dir.'video.mp4';
 			$result['videoType']="video/mp4";
-			$dir=dirname(__FILE__) . '/../../../../tmp/';
 			if(file_exists($result['video']))
 				exec('sudo rm '.$result['video']);
 			$LogFile=$dir.'convert.txt';
