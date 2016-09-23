@@ -30,35 +30,6 @@ then
 	rm -R /etc/motion/
 fi
 echo "*****************************************************************************************************"
-echo "*                                Installing additional libraries                                    *"
-echo "*****************************************************************************************************"
-sudo apt-get install -y --force-yes curl
-echo 4 > /tmp/compilation_motion_in_progress
-sudo apt-get install -y --force-yes debhelper
-echo 5 > /tmp/compilation_motion_in_progress
-sudo apt-get install -y --force-yes dpkg-dev
-echo 6 > /tmp/compilation_motion_in_progress
-sudo apt-get install -y --force-yes dh-autoreconf
-echo 7 > /tmp/compilation_motion_in_progress
-sudo apt-get install -y --force-yes libavcodec-dev
-echo 8 > /tmp/compilation_motion_in_progress
-sudo apt-get install -y --force-yes libavformat-dev
-echo 9 > /tmp/compilation_motion_in_progress
-sudo apt-get install -y --force-yes libjpeg-dev
-echo 10 > /tmp/compilation_motion_in_progress
-sudo apt-get install -y --force-yes libpq-dev
-echo 11 > /tmp/compilation_motion_in_progress
-sudo apt-get install -y --force-yes libv4l
-echo 12 > /tmp/compilation_motion_in_progress
-sudo apt-get install -y --force-yes libv4l-dev
-echo 13 > /tmp/compilation_motion_in_progress
-sudo apt-get install -y --force-yes zlib1g-dev
-echo 14 > /tmp/compilation_motion_in_progress
-sudo apt-get install -y --force-yes libav-tools 
-echo 15 > /tmp/compilation_motion_in_progress
-sudo apt-get install -y --force-yes ffmpeg
-echo 20 > /tmp/compilation_motion_in_progress
-echo "*****************************************************************************************************"
 echo "*                                          Installation de FFMPEG                                   *"
 echo "*****************************************************************************************************"
 test=$(grep '#http://www.deb-multimedia.org' /etc/apt/sources.list)
@@ -68,7 +39,7 @@ then
 	echo "deb http://www.deb-multimedia.org jessie main non-free" | sudo tee -a /etc/apt/sources.list
 	echo "deb-src http://www.deb-multimedia.org jessie main non-free" | sudo tee -a /etc/apt/sources.list
 fi 
-echo 21 > /tmp/compilation_motion_in_progress
+echo 10 > /tmp/compilation_motion_in_progress
 sudo apt-get -y update
 echo 30 > /tmp/compilation_motion_in_progress
 sudo apt-get -y upgrade
