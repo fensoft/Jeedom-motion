@@ -96,7 +96,8 @@
 				exec('sudo rm '.$result['video']);
 			$LogFile=$dir.'convert.txt';
 			if(!file_exists($LogFile)){
-				$cmd = 'sudo ffmpeg -i '.init('src').' -vcodec libx264 '.$result['video'];
+				$cmd = 'sudo ffmpeg -i '.init('src').' -vcodec libx264 -vpre lossless_slow -crf 25 -acodec libfaac -threads 0 -t 60 '.$result['video'];
+				//$cmd = 'sudo ffmpeg -i  -vcodec libx264 '.$result['video'];
 				$cmd .= ' >> ' . $LogFile . ' 2>&1 &';
 				exec($cmd);
 			}
