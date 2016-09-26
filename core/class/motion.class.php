@@ -9,6 +9,7 @@ class motion extends eqLogic {
 	//                                                                                                                                               //
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    	public static function getUsbMapping($_name = '') {
+		exec('sudo chmod 777 /dev/video*');
 		$cache = cache::byKey('motion::usbMapping');
 		if (!is_json($cache->getValue()) || $_name == '') {
 			$usbMapping = array();
