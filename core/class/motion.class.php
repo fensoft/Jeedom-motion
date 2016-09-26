@@ -234,7 +234,7 @@ class motion extends eqLogic {
 		$file='/etc/motion/motion.conf';
 		/*$Camera=eqLogic::byLogicalId('/etc/motion/motion.conf','motion',false);
 		self::WriteThread($Camera,$file);*/
-		if($fp = fopen($file,"a+")){
+		if($fp = fopen($file,"w")){
 			fputs($fp,'daemon on');
 			fputs($fp, "\n");
 			fputs($fp,'setup_mode off');
