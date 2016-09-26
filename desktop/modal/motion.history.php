@@ -84,35 +84,34 @@ foreach ($files as $date => &$file) {
 }
 ?>
 <script>
-    $('.cameraThumbnailContainer').packery({gutter : 5});
-    $('.displayImage').on('click', function() {
-        $('#md_modal2').dialog({title: "Visualisation des prises de vue"});
-        $('#md_modal2').load('index.php?v=d&plugin=motion&modal=motion.displayImage&src='+ $(this).attr('src')).dialog('open');
-    });
-	    $('.bt_removeCameraFile').on('click', function() {
-        var card;
-        if($(this).attr('data-day') == 1){
-            card = $(this).closest('.div_dayContainer');
-			var date=$(this).attr('data-date')
-			$('.bt_removeCameraFile[data-day='+date+']').each(function() {
+	$('.cameraThumbnailContainer').packery({gutter : 5});
+	$('.displayImage').on('click', function() {
+		$('#md_modal2').dialog({title: "Visualisation des prises de vue"});
+		$('#md_modal2').load('index.php?v=d&plugin=motion&modal=motion.displayImage&src='+ $(this).attr('src')).dialog('open');
+	});
+	$('.bt_removeCameraFile').on('click', function() {
+        	var card;
+		if($(this).attr('data-day') == '1'){
+			card = $(this).closest('.div_dayContainer');
+			$(this).children().each(function() {
 				if($(this).attr('data-filename'))
 					RemoveFile($(this).attr('data-filename'));
 			});
-        }
-        else if($(this).attr('data-all') == 1){
-            card = $('.div_dayContainer');
+		}
+		else if($(this).attr('data-all') == '1'){
+			card = $('.div_dayContainer');
 			$('.bt_removeCameraFile').each(function() {
 				if($(this).attr('data-filename'))
 					RemoveFile($(this).attr('data-filename'));
 			});
-        }
+		}
 		else 
 		{
 			card = $(this).closest('.cameraDisplayCard')
 			RemoveFile($(this).attr('data-filename'));
 		}
 		card.remove();
-    });
+	});
 	function RemoveFile(filename){	
         $.ajax({// fonction permettant de faire de l'ajax
             type: "POST", // methode de transmission des données au fichier php
