@@ -358,7 +358,7 @@ class motion extends eqLogic {
 	}
 	public static function NewThread($Camera) {
 		//$file=$Camera->getLogicalId();
-		$file='/etc/motion/thread'.$this->getId().'.conf';
+		$file='/etc/motion/thread'.$Camera->getId().'.conf';
 		self::WriteThread($Camera,$file);
 		self::UpdateMotionConf();
 		self::deamon_start();
