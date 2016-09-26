@@ -112,13 +112,13 @@ class motion extends eqLogic {
     	}
 	public function postSave() {
 		if($this->getLogicalId()==''){
-			if(count(eqLogic::byLogicalId('/etc/motion/motion.conf','motion',true))==0)
-				$file='/etc/motion/motion.conf';
-			else
+			//if(count(eqLogic::byLogicalId('/etc/motion/motion.conf','motion',true))==0)
+			//	$file='/etc/motion/motion.conf';
+			//else
 				$file='/etc/motion/thread'.$this->getId().'.conf';
-			$this->setLogicalId($file);
-			$this->save();
-		}else{
+			//$this->setLogicalId($file);
+			//$this->save();
+		//}else{
 			self::NewThread($this);
 			self::AddCommande($this,__('Parcourir les video', __FILE__),'browseRecord',"info", 'binary');
 			self::AddCommande($this,'Détection','detect',"info", 'binary','','','Motion');
@@ -134,7 +134,7 @@ class motion extends eqLogic {
 			$CommandeDetection=self::AddCommande($this,'Activer/Desactiver la détection','detectionaction',"action", 'other','','MotionDetect');
 			$CommandeDetection->setValue($StatusDetection->getId());
 			$CommandeDetection->save();
-		}
+		//}
     	}
 	public function preRemove() {
 		self::RemoveThread($this);
@@ -232,8 +232,8 @@ class motion extends eqLogic {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static function UpdateMotionConf() {
 		$file='/etc/motion/motion.conf';
-		$Camera=eqLogic::byLogicalId('/etc/motion/motion.conf','motion',false);
-		self::WriteThread($Camera,$file);
+		/*$Camera=eqLogic::byLogicalId('/etc/motion/motion.conf','motion',false);
+		self::WriteThread($Camera,$file);*/
 		if($fp = fopen($file,"a+")){
 			fputs($fp,'daemon on');
 			fputs($fp, "\n");
@@ -357,7 +357,8 @@ class motion extends eqLogic {
 		}
 	}
 	public static function NewThread($Camera) {
-		$file=$Camera->getLogicalId();
+		//$file=$Camera->getLogicalId();
+		$file='/etc/motion/thread'.$this->getId().'.conf';
 		self::WriteThread($Camera,$file);
 		self::UpdateMotionConf();
 		self::deamon_start();
