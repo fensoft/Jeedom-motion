@@ -111,7 +111,7 @@ class motion extends eqLogic {
 		$this->setConfiguration('ipv6_enabled',0);       
     	}
 	public function postSave() {
-		if($this->getLogicalId()==''){
+		//if($this->getLogicalId()==''){
 			//if(count(eqLogic::byLogicalId('/etc/motion/motion.conf','motion',true))==0)
 			//	$file='/etc/motion/motion.conf';
 			//else
