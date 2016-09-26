@@ -50,13 +50,13 @@ krsort($files);
 ?>
 <div id='div_cameraRecordAlert' style="display: none;"></div>
 <?php
-echo '<a class="btn btn-danger bt_removeCameraFile pull-right" data-all="1"><i class="fa fa-trash-o"></i> {{Tout supprimer}}</a>';
+echo '<a class="btn btn-danger bt_removeCameraFile pull-right"><i class="fa fa-trash-o"></i> {{Tout supprimer}}</a>';
 ?>
 <?php
 foreach ($files as $date => &$file) {
 	echo '<div class="div_dayContainer">';
 	echo '<legend>';
-	echo '<a class="btn btn-xs btn-danger bt_removeCameraFile" data-day="1"><i class="fa fa-trash-o"></i> {{Supprimer}}</a> ';
+	echo '<a class="btn btn-xs btn-danger bt_removeCameraFile"><i class="fa fa-trash-o"></i> {{Supprimer}}</a> ';
 	echo $date;
 	echo '</legend>';
 	echo '<div class="cameraThumbnailContainer">';
@@ -90,42 +90,30 @@ foreach ($files as $date => &$file) {
 		$('#md_modal2').load('index.php?v=d&plugin=motion&modal=motion.displayImage&src='+ $(this).attr('src')).dialog('open');
 	});
 	$('.bt_removeCameraFile').on('click', function() {
-        	var card;
-		if($(this).attr('data-day') == '1'){
-			card = $(this).closest('.div_dayContainer');
+		if($(this).attr('data-filename')){
+			RemoveFile($(this).attr('data-filename'));
+		}else {
 			$(this).children().each(function() {
 				if($(this).attr('data-filename'))
 					RemoveFile($(this).attr('data-filename'));
 			});
 		}
-		else if($(this).attr('data-all') == '1'){
-			card = $('.div_dayContainer');
-			$('.bt_removeCameraFile').each(function() {
-				if($(this).attr('data-filename'))
-					RemoveFile($(this).attr('data-filename'));
-			});
-		}
-		else 
-		{
-			card = $(this).closest('.cameraDisplayCard')
-			RemoveFile($(this).attr('data-filename'));
-		}
-		card.remove();
+		$(this).parent().remove();
 	});
 	function RemoveFile(filename){	
-        $.ajax({// fonction permettant de faire de l'ajax
-            type: "POST", // methode de transmission des données au fichier php
-            url: "plugins/motion/core/ajax/motion.ajax.php", // url du fichier php
-            data: {
-                action: "removeRecord",
-                file: filename,
+		$.ajax({// fonction permettant de faire de l'ajax
+			type: "POST", // methode de transmission des données au fichier php
+			url: "plugins/motion/core/ajax/motion.ajax.php", // url du fichier php
+			data: {
+				action: "removeRecord",
+				file: filename,
 				cameraId:<?php echo $camera->getId();?>,
-            },
-            dataType: 'json',
-            error: function(request, status, error) {
-                handleAjaxError(request, status, error,$('#div_cameraRecordAlert'));
-            },
-            success: function(data) { // si l'appel a bien fonctionné
+			},
+			dataType: 'json',
+			error: function(request, status, error) {
+				handleAjaxError(request, status, error,$('#div_cameraRecordAlert'));
+			},
+			success: function(data) { // si l'appel a bien fonctionné
 				if (data.state != 'ok') {
 					$('#div_cameraRecordAlert').showAlert({message: data.result, level: 'danger'});
 					return;
