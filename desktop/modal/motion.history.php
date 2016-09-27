@@ -95,8 +95,9 @@ foreach ($files as $date => &$file) {
 		}else {
 			alert($(this).html());
 			$(this).each(function() {
-				alert($(this).attr('data-filename'));
-				RemoveFile($(this).attr('data-filename'));
+				alert($(this).attr('data-filename'));				
+				if(typeof $(this).attr('data-filename') != 'undefined')
+					RemoveFile($(this).attr('data-filename'));
 			});
 		}
 		$(this).parent().parent().remove();
