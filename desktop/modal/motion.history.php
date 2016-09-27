@@ -22,7 +22,7 @@ if(substr($directory,0,1)=='/')
 	$url=substr($url,0,-1);
 $files = array();
 $offset=strpos($camera->getConfiguration('snapshot_filename'),'-')+1;
-$StartAnnée=strpos($camera->getConfiguration('snapshot_filename'),'%Y')-$offset;
+$StartAnnee=strpos($camera->getConfiguration('snapshot_filename'),'%Y')-$offset;
 $StartMoi=strpos($camera->getConfiguration('snapshot_filename'),'%m')+2-$offset;
 $StartJour=strpos($camera->getConfiguration('snapshot_filename'),'%d')+2-$offset;
 $StartHeure=strpos($camera->getConfiguration('snapshot_filename'),'%H')+2-$offset;
@@ -32,7 +32,7 @@ foreach (ls($directory, '*') as $file) {
 	if($file != 'lastsnap.jpg'){
 		$offset=strpos($file,'-')+1;
 		$time = substr($file,$StartHeure+$offset,2).':'.substr($file,$StartMinute+$offset,2).':'.substr($file,$StartSeconde+$offset,2);
-		$date = substr($file,$StartJour+$offset,2).'/'.substr($file,$StartMoi+$offset,2).'/'.substr($file,$StartAnnée+$offset,4);
+		$date = substr($file,$StartJour+$offset,2).'/'.substr($file,$StartMoi+$offset,2).'/'.substr($file,$StartAnnee+$offset,4);
 		if ($date == '') {
 			continue;
 		}
@@ -98,7 +98,7 @@ foreach ($files as $date => &$file) {
 					RemoveFile($(this).attr('data-filename'));
 			});
 		}
-		$(this).parent().remove();
+		$(this).parent().parent().remove();
 	});
 	function RemoveFile(filename){	
 		$.ajax({// fonction permettant de faire de l'ajax
