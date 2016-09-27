@@ -93,10 +93,8 @@ foreach ($files as $date => &$file) {
 		if($(this).attr('data-filename')){
 			RemoveFile($(this).attr('data-filename'));
 		}else {
-			var child=$(this).children();
-			$.each(child,function() {
-				if($(this).attr('data-filename'))
-					RemoveFile($(this).attr('data-filename'));
+			$(this).find('.bt_removeCameraFile').each(function() {
+				RemoveFile($(this).attr('data-filename'));
 			});
 		}
 		$(this).parent().parent().remove();
