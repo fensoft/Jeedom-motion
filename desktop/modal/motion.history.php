@@ -93,8 +93,9 @@ foreach ($files as $date => &$file) {
 		if(typeof $(this).attr('data-filename') != 'undefined'){
 			RemoveFile($(this).attr('data-filename'));
 		}else {
+			alert($(this).html());
 			$.each($(this).find('.bt_removeCameraFile'),function() {
-				//alert($(this).attr('data-filename'));
+				alert($(this).attr('data-filename'));
 				RemoveFile($(this).attr('data-filename'));
 			});
 		}
