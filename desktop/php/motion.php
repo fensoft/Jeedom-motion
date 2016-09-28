@@ -772,14 +772,12 @@ $eqLogics = eqLogic::byType('motion');
 							</div>					
 						</div>
 					</div>
-
-
 				</div>
 			</fieldset> 
         </form>
 
         <legend>{{Motion camera option}}</legend>
-        <a class="btn btn-success btn-sm cmdAction" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter une zone de detection}}</a><br/><br/>
+        <!--a class="btn btn-success btn-sm cmdAction" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter une zone de detection}}</a><br/><br/-->
         <table id="table_cmd" class="table table-bordered table-condensed">
             <thead>
                 <tr>
