@@ -34,68 +34,41 @@ include_file('desktop', 'jquery.maphilight.min', 'js', 'motion');
 }
 </style>
 <div class="polygon">
-	<span class="directDisplay cursor" style="width : 90%;max-height:90%">
-		<img src="" class="img-responsive" data-eqLogic_id="#id#"/>
-	</span>
 	<div id="div_displayArea"></div>
 	<map name="map" id="map"></map>
 </div>
 <script>
+
+$.ajax({
+	type: 'POST',
+	url: 'plugins/motion/core/ajax/motion.ajax.php',
+	data: {
+		action: 'WidgetHtml',
+		cameraId:eqLogiqId
+	},
+	dataType: 'json',
+	global: false,
+	error: function (request, status, error) {
+		handleAjaxError(request, status, error, $('#div_updatepreRequisAlert'));
+	},
+	success: function (data) {
+		if (data.result)
+		{
+			$('.polygon').append(data.result);
+			$('.polygon').find('.directDisplay'+eqLogiqId).clone().appendTo(".AreaContent");
+			$('.polygon').find('.eqLogic').remove('.eqLogic');
+		}
+	}
+});
 var coords=[];
 for(var loop=0; loop<areas.length; loop=loop+2)
 {
 	var coord=[areas[loop],areas[loop+1]]
 	coords.push(coord);
 };
-if (typeof timeoutCamera !== "undefined") {
-	clearTimeout(timeoutCamera);
-}
-refreshImgCam();
 $('.directDisplay').on('click', function (e) {
 	setCoordinates(e);
 }); 
-function refreshImgCam(){	
-	$.ajax({// fonction permettant de faire de l'ajax
-		type: "POST", // methode de transmission des données au fichier php
-		url: "plugins/motion/core/ajax/motion.ajax.php", // url du fichier php
-		data: {
-			action: "RefreshFlux",
-			cameraId: $('.eqLogicAttr[data-l1key=id]').val(),
-		},
-		dataType: 'json',
-		global: false,
-		error: function(request, status, error) {
-			handleAjaxError(request, status, error);
-		},
-		success: function(data) { // si l'appel a bien fonctionné
-			if (data.state != 'ok') {
-				$('#div_alert').showAlert({message: data.result, level: 'danger'});
-				return;
-			}
-			if(!data.result){
-				$('.directDisplay img').hide();
-			}
-			else {
-				var url = "./plugins/motion/ressources/"+data.result;
-				if(url.indexOf('?') > 0){
-					url += '&t='+(new Date()).getTime();
-				}else{
-					url += '?t='+(new Date()).getTime();
-				}
-				var img = new Image();
-				img.src = url;
-				img.onload = function() {
-					$('.directDisplay img').show();
-					$('.directDisplay img').attr('src',img.src);
-					$('.directDisplay img').attr('usemap',"#map");
-					updateCoords();
-					 if($('.directDisplay').html() != undefined)
-					   timeoutCamera = setTimeout(refreshImgCam, 1000);
-				}
-			}
-		}
-	});
-}
 function hightlight() {
 	$('.directDisplay').find('img').maphilight({
 		stroke: true,
