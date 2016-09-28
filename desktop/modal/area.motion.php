@@ -71,11 +71,11 @@ $.ajax({
 		{
 			$('.AreaContent').append(data.result);
 			//$('.AreaContent').remove('.eqLogic')
-			$('.AreaContent').remove('.cmd');
+			$('.cmd').remove();
 			
 			$('.eqLogic-widget').css('width', $('#md_modal').width());
 			$('.directDisplay').find('img').load(function() {
-				if ($('.eqLogic-widget').find('.Areas').length==0){
+				if ($('.AreaContent').find('.Areas').length==0){
 					$('.AreaContent').append($('<center>').append($('<span>').addClass('Areas')));
 					var offsetImg = $('.ImgVideoFlux').offset();
 					var offsetArea =$('.AreaContent').find('.Areas').offset();
