@@ -69,11 +69,12 @@ $.ajax({
 	success: function (data) {
 		if (data.result)
 		{
-			$('.AreaContent').append(data.result);
+			var htmlWidget = $.parseHTML(data.result);
+			$('.AreaContent').append(htmlWidget.find('.ImgVideoFlux'));
 			//$('.AreaContent').remove('.eqLogic')
-			$('.AreaContent').find('.cmd').remove();
+			//$('.AreaContent').find('.cmd').remove();
 			
-			$('.eqLogic-widget').css('width', $('#md_modal').width());
+			$('.ImgVideoFlux').css('width', $('#md_modal').width());
 			$('.directDisplay').find('img').load(function() {
 				if ($('.AreaContent').find('.Areas').length==0){
 					$('.AreaContent').append($('<center>').append($('<span>').addClass('Areas')));
