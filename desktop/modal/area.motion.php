@@ -70,7 +70,7 @@ $.ajax({
 		if (data.result)
 		{
 			var ImgFlux=data.result;
-			ImgFlux.remove('.eqLogic')
+			//ImgFlux.remove('.eqLogic')
 			ImgFlux.remove('.cmd')
 			$('.AreaContent').append(ImgFlux);
 			
