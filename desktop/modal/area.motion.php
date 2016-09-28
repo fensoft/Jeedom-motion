@@ -73,14 +73,13 @@ $.ajax({
 			$('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).clone().appendTo(".AreaContent");
 			$('.AreaContent').find('.eqLogic').remove('.eqLogic');
 			
-			$('.directDisplay'+eqLogiqId).css('width', $('#md_modal').width());
 			$('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).load(function() {
 				if ($('.AreaContent').find('.Areas').length==0){
 					$('.AreaContent').append($('<center>').append($('<span>').addClass('Areas')));
 					var offsetImg = $('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).offset();
 					var offsetArea =$('.AreaContent').find('.Areas').offset();
-					$('.AreaContent').find('.Areas').css('width', $(this).width());
-					$('.AreaContent').find('.Areas').css('height', $(this).height());
+					$('.AreaContent').find('.Areas').css('width', $('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).width());
+					$('.AreaContent').find('.Areas').css('height',$('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).height());
 					$('.AreaContent').find('.Areas').css('left',offsetImg.left - offsetArea.left);
 					$('.AreaContent').find('.Areas').css('top', offsetImg.top - offsetArea.top);
 					for(var loop=0; loop<9; loop++)
@@ -89,8 +88,8 @@ $.ajax({
 							.append($('<div>')
 								.addClass('Area')
 								.attr('id','area_'+loop)
-								.css('width', $(this).width()/3)
-								.css('height', $(this).height()/3));
+								.css('width', $('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).width()/3)
+								.css('height',$('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).height()/3));
 						if(areas.indexOf(loop+1)>=0)
 							$('.AreaContent').find('#area_'+loop).addClass('Select');
 					};
