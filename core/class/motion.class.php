@@ -9,7 +9,6 @@ class motion extends eqLogic {
 	//                                                                                                                                               //
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    	public static function getUsbMapping($_name = '') {
-		exec('sudo chmod 777 /dev/video*');
 		$cache = cache::byKey('motion::usbMapping');
 		if (!is_json($cache->getValue()) || $_name == '') {
 			$usbMapping = array();
@@ -545,6 +544,7 @@ class motion extends eqLogic {
 		if ($deamon_info['launchable'] != 'ok') 
 			throw new Exception(__('Veuillez vérifier la configuration', __FILE__));
 		if ($deamon_info['state'] != 'ok') {
+			exec('sudo chmod 777 /dev/video*');
 			log::remove('motion');
 			$file='/etc/motion/motion.log';
 			if(!file_exists($file)){
