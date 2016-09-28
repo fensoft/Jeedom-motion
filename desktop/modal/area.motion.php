@@ -41,8 +41,8 @@ if (!isConnect('admin')) {
 <div id="debug"></div>
 <script>
 var eqLogiqId=$('.eqLogicAttr[data-l1key=id]').val();
- $('body').delegate('.Area', 'click', function (e) {
-	var AreaSelect=parseInt($(this).attr('id').explode('_')[1])+1;
+ $('body').on('click','.Area',function (e) {
+	var AreaSelect=parseInt($(this).attr('id').split('_')[1])+1;
 	if (areas.indexOf(AreaSelect)>=0)
 	{
 		$(this).removeClass('Select');
