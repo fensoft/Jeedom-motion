@@ -75,25 +75,26 @@ $.ajax({
 			
 			$('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).load(function() {
 				//alert('width: '+$(this).width()+' height:'+$(this).height());
-				if ($('.AreaContent').find('.Areas').length==0)
+				if ($('.AreaContent').find('.Areas').length==0){
 					$('.AreaContent').append($('<center>').append($('<span>').addClass('Areas')));
+					for(var loop=0; loop<9; loop++)
+					{
+						$('.AreaContent').find('.Areas')
+							.append($('<div>')
+								.addClass('Area')
+								.attr('id','area_'+loop));
+						if(areas.indexOf(loop+1)>=0)
+							$('.AreaContent').find('#area_'+loop).addClass('Select');
+					};
+				}
 				var offsetImg = $('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).offset();
 				var offsetArea =$('.AreaContent').find('.Areas').offset();
 				$('.AreaContent').find('.Areas').css('width', $(this).width());
 				$('.AreaContent').find('.Areas').css('height',$(this).height());
+				$('.AreaContent').find('.Area').css('width', $(this).width()/3);
+				$('.AreaContent').find('.Area').css('height',$(this).height()/3);
 				$('.AreaContent').find('.Areas').css('left',offsetImg.left - offsetArea.left);
 				$('.AreaContent').find('.Areas').css('top', offsetImg.top - offsetArea.top);
-				for(var loop=0; loop<9; loop++)
-				{
-					$('.AreaContent').find('.Areas')
-						.append($('<div>')
-							.addClass('Area')
-							.attr('id','area_'+loop)
-							.css('width', $(this).width())
-							.css('height', $(this).height()));
-					if(areas.indexOf(loop+1)>=0)
-						$('.AreaContent').find('#area_'+loop).addClass('Select');
-				};
 				
 			});
 		}
