@@ -75,7 +75,6 @@ $.ajax({
 			
 			$('.directDisplay'+eqLogiqId).css('width', $('#md_modal').width());
 			$('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).load(function() {
-				alert($('.AreaContent').find('.Areas').length);
 				if ($('.AreaContent').find('.Areas').length==0){
 					$('.AreaContent').append($('<center>').append($('<span>').addClass('Areas')));
 					var offsetImg = $('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).offset();
@@ -86,14 +85,14 @@ $.ajax({
 					$('.AreaContent').find('.Areas').css('top', offsetImg.top - offsetArea.top);
 					for(var loop=0; loop<9; loop++)
 					{
-						$('.eqLogic-widget').find('.Areas')
+						$('.AreaContent').find('.Areas')
 							.append($('<div>')
 								.addClass('Area')
 								.attr('id','area_'+loop)
 								.css('width', $(this).width()/3)
 								.css('height', $(this).height()/3));
 						if(areas.indexOf(loop+1)>=0)
-							$('.eqLogic-widget').find('#area_'+loop).addClass('Select');
+							$('.AreaContent').find('#area_'+loop).addClass('Select');
 					};
 				}
 			});
