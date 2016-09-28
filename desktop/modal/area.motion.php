@@ -74,7 +74,7 @@ $.ajax({
 			$('.AreaContent').find('.eqLogic').remove('.eqLogic');
 			
 			$('.directDisplay'+eqLogiqId).css('width', $('#md_modal').width());
-			$('.directDisplay'+eqLogiqId).find('img').load(function() {
+			$('.directDisplay'+eqLogiqId).load(function() {
 				if ($('.AreaContent').find('.Areas').length==0){
 					$('.AreaContent').append($('<center>').append($('<span>').addClass('Areas')));
 					var offsetImg = $('.directDisplay'+eqLogiqId).find('img').offset();
