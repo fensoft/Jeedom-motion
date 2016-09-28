@@ -8,7 +8,7 @@
 			<span class="Detection" style="position:absolute;right:0;">
 				#detect#
 			</span>
-			<img class="ImgVideoFlux img-responsive"src="plugins/motion/core/template/icones/no-image-blanc.png"  data-eqLogic_id="#id#" style="z-index:1"/>
+			<img class="ImgVideoFlux img-responsive"src="plugins/motion/core/template/icones/no-image-blanc.png"  data-eqLogic_id="#id#" style="z-index:1" onload="refreshImgCam#id#();"/>
 		</span>
         #action#
         <span class="cmd cmd-widget" data-type="action" data-subtype="other">
@@ -60,5 +60,5 @@
 	 if (typeof timeoutCamera#id# !== "undefined") {
 	  clearTimeout(timeoutCamera#id#);
 	}
-	refreshImgCam#id#();
+	//refreshImgCam#id#();
 </script>
