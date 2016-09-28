@@ -73,7 +73,7 @@ $.ajax({
 			//$('.AreaContent').remove('.eqLogic');
 			//$('.AreaContent').find('.cmd').remove();
 			$('.AreaContent').find('.ImgVideoFlux').clone().appendTo(".AreaContent");
-			$('.AreaContent').find('script').clone().appendTo(".AreaContent");
+			//$('.AreaContent').find('script').clone().appendTo(".AreaContent");
 			$('.AreaContent').find('.eqLogic').remove('.eqLogic');
 			
 			$('.ImgVideoFlux').css('width', $('#md_modal').width());
