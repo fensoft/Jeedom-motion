@@ -69,7 +69,11 @@ $.ajax({
 	success: function (data) {
 		if (data.result)
 		{
-			$('.AreaContent').append(data.result);
+			var ImgFlux=data.result;
+			ImgFlux.remove('.eqLogic')
+			ImgFlux.remove('.cmd')
+			$('.AreaContent').append(ImgFlux);
+			
 			$('.eqLogic-widget').css('width', $('#md_modal').width());
 			$('.directDisplay').find('img').load(function() {
 				if ($('.eqLogic-widget').find('.Areas').length==0){
