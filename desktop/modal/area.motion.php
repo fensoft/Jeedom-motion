@@ -71,18 +71,18 @@ $.ajax({
 		{
 			$('.AreaContent').append(data.result);
 			//$('.AreaContent').remove('.eqLogic')
-			$('.AreaContent').remove('.cmd')
+			$('.AreaContent').remove('.cmd');
 			
 			$('.eqLogic-widget').css('width', $('#md_modal').width());
 			$('.directDisplay').find('img').load(function() {
 				if ($('.eqLogic-widget').find('.Areas').length==0){
-					$('.eqLogic-widget').append($('<center>').append($('<span>').addClass('Areas')));
-					var offsetImg = $('.directDisplay').find('img').offset();
-					var offsetArea =$('.eqLogic-widget').find('.Areas').offset();
-					$('.eqLogic-widget').find('.Areas').css('width', $(this).width());
-					$('.eqLogic-widget').find('.Areas').css('height', $(this).height());
-					$('.eqLogic-widget').find('.Areas').css('left',offsetImg.left - offsetArea.left);
-					$('.eqLogic-widget').find('.Areas').css('top', offsetImg.top - offsetArea.top);
+					$('.AreaContent').append($('<center>').append($('<span>').addClass('Areas')));
+					var offsetImg = $('.ImgVideoFlux').offset();
+					var offsetArea =$('.AreaContent').find('.Areas').offset();
+					$('.AreaContent').find('.Areas').css('width', $(this).width());
+					$('.AreaContent').find('.Areas').css('height', $(this).height());
+					$('.AreaContent').find('.Areas').css('left',offsetImg.left - offsetArea.left);
+					$('.AreaContent').find('.Areas').css('top', offsetImg.top - offsetArea.top);
 					for(var loop=0; loop<9; loop++)
 					{
 						$('.eqLogic-widget').find('.Areas')
