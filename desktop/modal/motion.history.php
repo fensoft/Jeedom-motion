@@ -49,40 +49,42 @@ foreach (ls($directory, '*') as $file) {
 krsort($files);
 ?>
 <div id='div_cameraRecordAlert' style="display: none;"></div>
-<?php
-echo '<a class="btn btn-danger bt_removeCameraFile pull-right"><i class="fa fa-trash-o"></i> {{Tout supprimer}}</a>';
-?>
-<?php
-foreach ($files as $date => &$file) {
-	echo '<div class="div_dayContainer">';
-	echo '<legend>';
-	echo '<a class="btn btn-xs btn-danger bt_removeCameraFile"><i class="fa fa-trash-o"></i> {{Supprimer}}</a> ';
-	echo $date;
-	echo '</legend>';
-	echo '<div class="cameraThumbnailContainer">';
-	krsort($file);
-	foreach ($file as $time => $filename) {
-		if (isset($filename['photo'])){
-			echo '<div class="cameraDisplayCard" style="background-color: #e7e7e7;padding:5px;height:167px;">';
-			echo '<center>' . $time . '</center>';
-			echo '<center><img class="img-responsive cursor displayImage" src="core/php/downloadFile.php?pathfile=' . urlencode($url.$directory.$filename['photo']) . '" width="150"/></center>';
-			echo '<center style="margin-top:5px;"><a href="core/php/downloadFile.php?pathfile=' . urlencode($url.$directory.$filename['photo']) . '" class="btn btn-success btn-xs" style="color : white"><i class="fa fa-download"></i></a>';
-			echo ' <a class="btn btn-danger bt_removeCameraFile btn-xs" style="color : white" data-filename="' . $directory . $filename['photo'] . '"><i class="fa fa-trash-o"></i></a></center>';
-			echo '</div>';
+<div class="div_allContainer">
+	<legend>
+		<a class="btn btn-danger bt_removeCameraFile pull-right"><i class="fa fa-trash-o"></i> {{Tout supprimer}}</a>
+	</legend>
+	<?php
+	foreach ($files as $date => &$file) {
+		echo '<div class="div_dayContainer">';
+		echo '<legend>';
+		echo '<a class="btn btn-xs btn-danger bt_removeCameraFile"><i class="fa fa-trash-o"></i> {{Supprimer}}</a> ';
+		echo $date;
+		echo '</legend>';
+		echo '<div class="cameraThumbnailContainer">';
+		krsort($file);
+		foreach ($file as $time => $filename) {
+			if (isset($filename['photo'])){
+				echo '<div class="cameraDisplayCard" style="background-color: #e7e7e7;padding:5px;height:167px;">';
+				echo '<center>' . $time . '</center>';
+				echo '<center><img class="img-responsive cursor displayImage" src="core/php/downloadFile.php?pathfile=' . urlencode($url.$directory.$filename['photo']) . '" width="150"/></center>';
+				echo '<center style="margin-top:5px;"><a href="core/php/downloadFile.php?pathfile=' . urlencode($url.$directory.$filename['photo']) . '" class="btn btn-success btn-xs" style="color : white"><i class="fa fa-download"></i></a>';
+				echo ' <a class="btn btn-danger bt_removeCameraFile btn-xs" style="color : white" data-filename="' . $directory . $filename['photo'] . '"><i class="fa fa-trash-o"></i></a></center>';
+				echo '</div>';
+			}
+			if (isset($filename['video'])){
+				echo '<div class="cameraDisplayCard" style="background-color: #e7e7e7;padding:5px;height:167px;">';
+				echo '<center>' . $time . '</center>';
+				echo '<center><i class="img-responsive cursor displayImage fa fa-file-video-o fa-5x" src="' . urlencode($url.$directory . $filename['video']) . '" width="150"></i></center>';
+				echo '<center style="margin-top:5px;"><a href="core/php/downloadFile.php?pathfile=' . urlencode($url.$directory . $filename['video']) . '" class="btn btn-success btn-xs" style="color : white"><i class="fa fa-download"></i></a>';
+				echo ' <a class="btn btn-danger bt_removeCameraFile btn-xs" style="color : white" data-filename="' . $directory . $filename['video'] . '"><i class="fa fa-trash-o"></i></a></center>';
+				echo '</div>';
+			}
 		}
-		if (isset($filename['video'])){
-			echo '<div class="cameraDisplayCard" style="background-color: #e7e7e7;padding:5px;height:167px;">';
-			echo '<center>' . $time . '</center>';
-			echo '<center><i class="img-responsive cursor displayImage fa fa-file-video-o fa-5x" src="' . urlencode($url.$directory . $filename['video']) . '" width="150"></i></center>';
-			echo '<center style="margin-top:5px;"><a href="core/php/downloadFile.php?pathfile=' . urlencode($url.$directory . $filename['video']) . '" class="btn btn-success btn-xs" style="color : white"><i class="fa fa-download"></i></a>';
-			echo ' <a class="btn btn-danger bt_removeCameraFile btn-xs" style="color : white" data-filename="' . $directory . $filename['video'] . '"><i class="fa fa-trash-o"></i></a></center>';
-			echo '</div>';
-		}
+		echo '</div>';
+		echo '</div>';
 	}
-	echo '</div>';
-	echo '</div>';
-}
-?>
+	?>
+</div>
 <script>
 	$('.cameraThumbnailContainer').packery({gutter : 5});
 	$('.displayImage').on('click', function() {
