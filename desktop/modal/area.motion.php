@@ -74,10 +74,10 @@ $.ajax({
 			$('.AreaContent').find('.eqLogic').remove('.eqLogic');
 			
 			$('.directDisplay'+eqLogiqId).css('width', $('#md_modal').width());
-			$('.directDisplay'+eqLogiqId).load(function() {
+			$('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).load(function() {
 				if ($('.AreaContent').find('.Areas').length==0){
 					$('.AreaContent').append($('<center>').append($('<span>').addClass('Areas')));
-					var offsetImg = $('.directDisplay'+eqLogiqId).find('img').offset();
+					var offsetImg = $('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).offset();
 					var offsetArea =$('.AreaContent').find('.Areas').offset();
 					$('.AreaContent').find('.Areas').css('width', $(this).width());
 					$('.AreaContent').find('.Areas').css('height', $(this).height());
