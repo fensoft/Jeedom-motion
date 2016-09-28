@@ -70,14 +70,14 @@ $.ajax({
 		if (data.result)
 		{
 			$('.AreaContent').append(data.result);
-			$('.AreaContent').find('.ImgVideoFlux').clone().appendTo(".AreaContent");
+			$('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).clone().appendTo(".AreaContent");
 			//$('.AreaContent').find('.eqLogic').remove('.eqLogic');
 			
-			$('.ImgVideoFlux').css('width', $('#md_modal').width());
-			$('.directDisplay').find('img').load(function() {
+			$('.directDisplay'+eqLogiqId).css('width', $('#md_modal').width());
+			$('.directDisplay'+eqLogiqId).find('img').load(function() {
 				if ($('.AreaContent').find('.Areas').length==0){
 					$('.AreaContent').append($('<center>').append($('<span>').addClass('Areas')));
-					var offsetImg = $('.ImgVideoFlux').offset();
+					var offsetImg = $('.ImgVideoFlux'+eqLogiqId).offset();
 					var offsetArea =$('.AreaContent').find('.Areas').offset();
 					$('.AreaContent').find('.Areas').css('width', $(this).width());
 					$('.AreaContent').find('.Areas').css('height', $(this).height());
