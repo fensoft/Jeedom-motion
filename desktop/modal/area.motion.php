@@ -89,8 +89,8 @@ $.ajax({
 							.append($('<div>')
 								.addClass('Area')
 								.attr('id','area_'+loop)
-								.css('width', $(this).width()/3)
-								.css('height',$(this).height()/3));
+								.css('width', '33%')
+								.css('height', '33%'));
 						if(areas.indexOf(loop+1)>=0)
 							$('.AreaContent').find('#area_'+loop).addClass('Select');
 					};
