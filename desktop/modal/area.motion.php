@@ -71,7 +71,7 @@ $.ajax({
 		{
 			$('.AreaContent').append(data.result);
 			//$('.AreaContent').remove('.eqLogic')
-			$('.cmd').remove();
+			$('.AreaContent').find('.cmd').remove();
 			
 			$('.eqLogic-widget').css('width', $('#md_modal').width());
 			$('.directDisplay').find('img').load(function() {
