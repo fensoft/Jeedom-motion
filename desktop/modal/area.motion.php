@@ -69,10 +69,9 @@ $.ajax({
 	success: function (data) {
 		if (data.result)
 		{
-			var ImgFlux=data.result;
-			//ImgFlux.remove('.eqLogic')
-			ImgFlux.remove('.cmd')
-			$('.AreaContent').append(ImgFlux);
+			$('.AreaContent').append(data.result);
+			//$('.AreaContent').remove('.eqLogic')
+			$('.AreaContent').remove('.cmd')
 			
 			$('.eqLogic-widget').css('width', $('#md_modal').width());
 			$('.directDisplay').find('img').load(function() {
