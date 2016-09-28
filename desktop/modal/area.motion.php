@@ -76,7 +76,7 @@ $.ajax({
 			$('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).load(function() {
 				//alert('width: '+$(this).width()+' height:'+$(this).height());
 				//if ($('.AreaContent').find('.Areas').length==0){
-					$('.AreaContent').find(.Areas).parent().parent().remove();
+					$('.AreaContent').find('.Areas').parent().parent().remove();
 					$('.AreaContent').append($('<center>').append($('<span>').addClass('Areas')));
 					var offsetImg = $('.AreaContent').find('.ImgVideoFlux'+eqLogiqId).offset();
 					var offsetArea =$('.AreaContent').find('.Areas').offset();
