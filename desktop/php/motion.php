@@ -320,25 +320,29 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Luminosité}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="brightness" max="255" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="brightness" max="255" min="0" step="1" name="brightness">
+									<output for="brightness" onforminput="value = brightness.valueAsNumber;"></output>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Contraste}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="contrast" max="255" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="contrast" max="255" min="0" step="1" name="contrast">
+									<output for="contrast" onforminput="value = contrast.valueAsNumber;"></output>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Saturation}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="saturation" max="255" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="saturation" max="255" min="0" step="1" name="saturation">
+									<output for="saturation" onforminput="value = saturation.valueAsNumber;"></output>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Réglez la teinte}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="hue" max="255" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="hue" max="255" min="0" step="1" name="hue">
+									<output for="hue" onforminput="value = hue.valueAsNumber;"></output>
 								</div>
 							</div>
 						</div>
@@ -398,25 +402,29 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Créer dynamiquement un fichier de masque pendant le fonctionnement}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="smart_mask_speed" max="10" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="smart_mask_speed" max="10" min="0" step="1" name="smart_mask_speed">
+									<output for="smart_mask_speed" onforminput="value = smart_mask_speed.valueAsNumber;"></output>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Ignorer les changements d'intensité lumineuse soudaine massives (% de l'image)}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="lightswitch" max="100" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="lightswitch" max="100" min="0" step="1" name="lightswitch">
+									<output for="lightswitch" onforminput="value = lightswitch.valueAsNumber;"></output>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Cadres doivent contenir le mouvement au moins le nombre d'images spécifié}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="minimum_motion_frames" max="5" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="minimum_motion_frames" max="5" min="0" step="1"  name="minimum_motion_frames">
+									<output for="minimum_motion_frames" onforminput="value = minimum_motion_frames.valueAsNumber;"></output>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Indique le nombre de photos pré-capturées avant le mouvement}}</label>
 								<div class="col-sm-3">
-									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="pre_capture" max="5" min="0" step="1" />
+									<input class="eqLogicAttr form-control" type="range" data-l1key="configuration" data-l2key="pre_capture" max="5" min="0" step="1" name="pre_capture">
+									<output for="pre_capture" onforminput="value = pre_capture.valueAsNumber;"></output>
 								</div>
 							</div>
 							<div class="form-group">
