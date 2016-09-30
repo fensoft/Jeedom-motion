@@ -11,8 +11,7 @@ $('body').on('change',"input[type='range']",function() {
 	el
 	.next("output")
 	.css({
-		left: newPlace,
-		marginLeft: offset + "%"
+		left: newPlace
 	})
 	.text(el.val());
 })
