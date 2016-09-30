@@ -1,8 +1,6 @@
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
-var areas='';
-//$(function() {
-	var el, newPoint, newPlace, offset;
-	$("input[type='range']").change(function() {
+var el, newPoint, newPlace, offset,width,areas;
+$('body').on('change',"input[type='range']",function() {
 	el = $(this);
 	width = el.width();
 	newPoint = (el.val() - el.attr("min")) / (el.attr("max") - el.attr("min"));
@@ -17,9 +15,8 @@ var areas='';
 		marginLeft: offset + "%"
 	})
 	.text(el.val());
-	})
-	.trigger('change');
-//});
+})
+.trigger('change');
 $.ajax({
 	type: "POST",
 	timeout:8000, 
