@@ -1,5 +1,5 @@
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
-var el, newPoint, newPlace, offset,width,areas;
+var el, newPoint, newPlace, offset, width, areas;
 $('body').on('change',"input[type='range']",function() {
 	el = $(this);
 	width = el.width();
