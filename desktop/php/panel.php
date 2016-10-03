@@ -1,8 +1,4 @@
 <?php
-if (!hasRight('dashboardview')) {
-	throw new Exception('{{401 - Accès non autorisé}}');
-}
-
 if (init('object_id') == '') {
 	$object = object::byId($_SESSION['user']->getOptions('defaultDashboardObject'));
 } else {
