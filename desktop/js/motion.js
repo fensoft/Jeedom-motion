@@ -1,19 +1,20 @@
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
-var el, newPoint, newPlace, offset, width, areas;
+var areas;
 $('body').on('change',"input[type='range']",function() {
-	el = $(this);
-	width = el.width();
-	newPoint = (el.val() - el.attr("min")) / (el.attr("max") - el.attr("min"));
-	offset = -1.3;
-	if (newPoint < 0) { newPlace = 0; }
-	else if (newPoint > 1) { newPlace = width; }
-	else { newPlace = width * newPoint + offset; offset -= newPoint; }
-	el
-	.next("output")
-	.css({
-		left: newPlace
-	})
-	.text(el.val());
+	var el = $(this);
+	var width = el.width();
+	var newPoint = (el.val() - el.attr("min")) / (el.attr("max") - el.attr("min"));
+	if (newPoint < 0) 
+		newPoint = 0; 
+	else if (newPoint > 1) 
+		newPoint = width; 
+	else 
+		newPoint = width * newPoint ; 
+	el.next("output")
+		.css({
+			left: newPoint
+		})
+		.text(el.val());
 })
 .trigger('change');
 $.ajax({
