@@ -10,7 +10,7 @@ $('body').on('change',"input[type='range']",function() {
 	else if (newPoint > 1) 
 		newPoint = width; 
 	else {
-		newPoint = width * newPoint ; 
+		newPoint = width * newPoint + offset; 
 		offset -= newPoint;
 	}
 	el.next("output")
