@@ -11,7 +11,7 @@ $('body').on('change',"input[type='range']",function() {
 		newPoint = width; 
 	else {
 		newPoint = width * newPoint + offset; 
-		offset -= newPoint;
+		offset += newPoint;
 	}
 	el.next("output")
 		.css({
