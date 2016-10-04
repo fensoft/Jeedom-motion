@@ -15,8 +15,6 @@ $eqLogics = eqLogic::byType('motion');
 		border-radius: 10px; 
 		display: inline-block; 
 		font: bold 15px/30px Georgia;
-		bottom: 175%;
-		margin-left: -1%;
 	}
 	output:after { 
 		content: "";
