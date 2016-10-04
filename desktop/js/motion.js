@@ -3,15 +3,16 @@ var areas;
 $('body').on('change',"input[type='range']",function() {
 	var el = $(this);
 	var width = el.width();
-	var offset = 1.3;
+	var offset = -1.3;
 	var newPoint = (el.val() - el.attr("min")) / (el.attr("max") - el.attr("min"));
 	if (newPoint < 0) 
 		newPoint = 0; 
 	else if (newPoint > 1) 
 		newPoint = width; 
 	else {
-		newPoint = width * newPoint ; 
-		offset += newPoint;
+		newPoint = width * newPoint;
+		newPoint += offset ; 
+		offset -= newPoint;
 	}
 	el.next("output")
 		.css({
