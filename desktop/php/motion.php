@@ -12,11 +12,10 @@ $eqLogics = eqLogic::byType('motion');
 		width: 40px; 
 		height: 30px; 
 		text-align: center; 
-		color: white; 
 		border-radius: 10px; 
 		display: inline-block; 
 		font: bold 15px/30px Georgia;
-		bottom: 175%;
+		bottom: 120%;
 		left: 0;
 		margin-left: -1%;
 	}
