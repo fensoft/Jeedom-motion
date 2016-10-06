@@ -551,7 +551,7 @@ class motion extends eqLogic {
 				$fp = fopen($file,"w+");
 				fclose($fp);
 			}
-			$cmd = 'motion';
+			$cmd = 'sudo motion';
 			$cmd .= ' >> ' . log::getPathToLog('motion') . ' 2>&1 &';
 			exec($cmd);
 		}
