@@ -2,11 +2,11 @@
 <info>
     <id>motion</id>
     <name>Motion</name>
-    <description>Plugin permanent de configurer et d'utiliser le logiciel Motion. Celui-ci permet de streamer nos webcam et de faire de la detection de mouvement sur nos camera</description>
+    <description>Plugin permettant de configurer et d'utiliser le logiciel Motion. Celui-ci permet de streamer nos webcams et de faire de la détection de mouvement sur nos caméras</description>
     <icon>fa fa-video-camera</icon>
     <licence>AGPL</licence>
     <author>Halbout Michael</author>
-    <installation>Procedure automatique ci dessous</installation>
+    <installation>Procédure automatique ci dessous</installation>
     <require>2.0</require>
     <version>1</version>
     <category>security</category>
