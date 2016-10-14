@@ -173,10 +173,14 @@ function addCmdToTable(_cmd) {
 			.append($('<input type="hidden" class="cmdAttr" data-l1key="type" value="info" />'))
 			.append($('<input type="hidden" class="cmdAttr" data-l1key="subType" value="binary" />'))
 			.append($('<span>')
-				.append($('<input type="checkbox" class="cmdAttr bootstrapSwitch" data-size="mini" data-label-text="{{Historiser}}" data-l1key="isHistorized" checked/>')))
+				.append($('<label>')
+					.text('{{Historiser}}'))
+				.append($('<input type="checkbox" class="cmdAttr" data-size="mini" data-label-text="{{Historiser}}" data-l1key="isHistorized" checked/>')))
 			.append($('</br>'))
 			.append($('<span>')
-				.append($('<input type="checkbox" class="cmdAttr bootstrapSwitch" data-size="mini" data-label-text="{{Afficher}}" data-l1key="isVisible" checked/>'))));
+				.append($('<label>')
+					.text('{{Afficher}}'))
+				.append($('<input type="checkbox" class="cmdAttr" data-size="mini" data-label-text="{{Afficher}}" data-l1key="isVisible" checked/>'))));
 	if (_cmd.logicalId =='detect')
 	{
 		action.append($('<div style="width : 40%;display : inline-block;">')
