@@ -52,9 +52,9 @@ $eqLogics = eqLogic::byType('motion');
 		<div class="eqLogicThumbnailContainer">
 			<div class="cursor logDemon" style="background-color : #ffffff;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
 			  <center>
-				<i class="fa fa-file-o" style="font-size : 5em;color:#767676;"></i>
+				<i class="fa fa-heartbeat" style="font-size : 5em;color:#767676;"></i>
 			  </center>
-				<center>{{Log}}</center>
+				<center>{{Information sur l'activité de motion}}</center>
 			</div>
 		</div>
         <legend>{{Mes camera surveiller}}</legend>
