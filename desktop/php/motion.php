@@ -134,8 +134,10 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-sm-2 control-label" ></label>
 								<div class="col-sm-9">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Activer}}" data-l1key="isEnable" checked/>
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
+									<label>{{Activer}}</label>
+									<input type="checkbox" class="eqLogicAttr" data-label-text="{{Activer}}" data-l1key="isEnable" checked/>
+									<label>{{Visible}}</label>
+									<input type="checkbox" class="eqLogicAttr" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -160,13 +162,13 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Streaming}}</label>
 								<div class="col-sm-3">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="stream_motion" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="stream_motion" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Streaming uniquement en local}}</label>
 								<div class="col-sm-3">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="stream_localhost" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="stream_localhost" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -335,13 +337,13 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Réglez les contrôles jpeg moins strictes}}</label>
 								<div class="col-sm-3">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="netcam_tolerant_check" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="netcam_tolerant_check" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Laissez mouvement réguler la luminosité d'un dispositif vidéo}}</label>
 								<div class="col-sm-3">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="auto_brightness" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="auto_brightness" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -393,7 +395,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Essayez de filtrer le bruit généré}}</label>
 								<div class="col-sm-3">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="switchfilter" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="switchfilter" />
 								</div>
 							</div>
 						</div>
@@ -417,7 +419,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Règle automatiquement le seuil de bruit}}</label>
 								<div class="col-sm-3">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="noise_tune" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="noise_tune" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -475,7 +477,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Toujours enregistrer des images même si il n'y avait pas de mouvement}}</label>
 								<div class="col-sm-3">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="emulate_motion" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="emulate_motion" />
 								</div>
 							</div>
 						</div>
@@ -505,7 +507,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2 control-label">{{Images de sortie avec seulement les pixels objet en mouvement}}</label>
 								<div class="col-sm-3">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="output_debug_pictures" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="output_debug_pictures" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -523,13 +525,13 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2  control-label">Utiliser ffmpeg pour encoder les vidéos mpeg en temps réel :</label>
 								<div class="col-sm-3 ">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="ffmpeg_output_movies" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="ffmpeg_output_movies" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-2  control-label">Creer un video avec juste les pixel en mouvement :</label>
 								<div class="col-sm-3 ">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="ffmpeg_output_debug_movies" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="ffmpeg_output_debug_movies" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -573,7 +575,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2  control-label">Utilisez ffmpeg pour désentrelacer vidéo :</label>
 								<div class="col-sm-3 ">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="ffmpeg_deinterlace" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="ffmpeg_deinterlace" />
 								</div>
 							</div>
 						</div>
@@ -592,7 +594,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2  control-label">Localiser et tracer un cadre autour de l'objet en mouvement.</label>
 								<div class="col-sm-3 ">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="locate_motion_mode" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="locate_motion_mode" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -615,7 +617,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2  control-label">Dessinez le nombre de changements pixel sur les images :</label>
 								<div class="col-sm-3 ">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="text_changes" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="text_changes" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -627,7 +629,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group">
 								<label class="col-md-2  control-label">Utiliser ffmpeg pour encoder les vidéos mpeg en temps réel :</label>
 								<div class="col-sm-3 ">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="text_double" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="text_double" />
 								</div>
 							</div>
 						</div>
@@ -674,7 +676,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group" id="Capture_device_options">
 								<label class="col-md-2  control-label">Utiliser IPV6 :</label>
 								<div class="col-sm-3 ">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="ipv6_enabled" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="ipv6_enabled" />
 								</div>
 							</div>
 						</div>
@@ -699,7 +701,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group" >
 								<label class="col-md-2  control-label">Enable auto tracking (default: off) :</label>
 								<div class="col-sm-3 ">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="track_auto" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="track_auto" />
 								</div>
 							</div>
 							<div class="form-group" >
@@ -718,7 +720,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group" >
 								<label class="col-md-2  control-label">Set motorx reverse (default: 0) :</label>
 								<div class="col-sm-3 ">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="track_motorx_reverse" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="track_motorx_reverse" />
 								</div>
 							</div>
 							<div class="form-group" >
@@ -730,7 +732,7 @@ $eqLogics = eqLogic::byType('motion');
 							<div class="form-group" >
 								<label class="col-md-2  control-label">Set motory reverse (default: 0) :</label>
 								<div class="col-sm-3 ">
-									<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="track_motory_reverse" />
+									<input type="checkbox" class="eqLogicAttr" data-size="mini" data-label-text="{{Activer}}" data-l1key="configuration" data-l2key="track_motory_reverse" />
 								</div>
 							</div>
 							<div class="form-group" >
