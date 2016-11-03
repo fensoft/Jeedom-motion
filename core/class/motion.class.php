@@ -443,8 +443,8 @@ class motion extends eqLogic {
 			while (substr_count($data,"--myboundary") != 2) 
 				$data.=fread($f,1024);
 			fclose($f);
-			//$data=substr($data,strpos($data,"\r\n\r\n")+4);
-			//$data=trim(substr($data,0,stripos($data,"--myboundary")-2));
+			$data=substr($data,strpos($data,"\r\n\r\n")+4);
+			$data=trim(substr($data,0,stripos($data,"--myboundary")-2));
 			$output_file = $this->getName();
 			$output_file = htmlentities($output_file, ENT_NOQUOTES, 'utf-8');
 			$output_file = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $output_file);
