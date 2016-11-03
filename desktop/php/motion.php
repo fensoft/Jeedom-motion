@@ -159,6 +159,17 @@ $eqLogics = eqLogic::byType('motion');
 
 								</div>
 							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">{{Commande d'alerte (mail, slack...)}}</label>
+								<div class="col-md-8">
+									<div class="input-group">
+										<input type="text" class="eqLogicAttr" data-l1key="configuration" data-l2key="alertMessageCommand" placeholder="{{Commande mail pour l'envoi d'une capture}}"/>
+										<span class="input-group-btn">
+									    		<a class="btn btn-default listCmdActionMessage" id="bt_selectActionMessage"><i class="fa fa-list-alt"></i></a>
+										</span>
+								    	</div>
+								</div>      
+							    </div> 
 						</div>
 					</div>
 					<div class="tab-pane" id="StreamOptions">
