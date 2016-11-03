@@ -432,12 +432,11 @@ class motion extends eqLogic {
 	public function getSnapshot() {
 		$directory=$this->getSnapshotDiretory();
 		$url=$this->getUrl();
-		if (!self::url_exists($url))
-			return 'plugins/motion/core/template/icones/no-image-blanc.png';
-		if(!$f=@fopen($url,"r")){
+		if (!self::url_exists($url)){
+			log::add('motion','debug','l\'URL de la Camera n\'existe pas : '.$url);
 			return 'plugins/motion/core/template/icones/no-image-blanc.png';
 		}
-		else {
+		if($f=@fopen($url,"r")){
 			//**** URL OK
 			$data=null;
 			while (substr_count($data,"--myboundary") != 2) 
@@ -454,8 +453,10 @@ class motion extends eqLogic {
 			$output_file .= '.jpg';
 			if(file_exists($directory.$output_file))
 				exec('sudo rm '.$directory.$output_file);
-			if (empty($data))
+			if (empty($data)){
+				log::add('motion','debug','Aucune data récupérer du flux');
 				return 'plugins/motion/core/template/icones/no-image-blanc.png';
+			}
 			file_put_contents($directory. $output_file, $data);
 			$url=dirname(__FILE__);
 			if(substr($url,-1)!='/')
@@ -467,6 +468,7 @@ class motion extends eqLogic {
 			$url.=$directory . $output_file;
 			return 'core/php/downloadFile.php?pathfile=' . urlencode($url);
 		}
+		log::add('motion','debug','Impossible d\'ouvrir l\'URL de la Camera : '.$url);
 		return 'plugins/motion/core/template/icones/no-image-blanc.png';
 	}	
 	public static function CleanFolder($CameraId) {
