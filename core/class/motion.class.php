@@ -496,6 +496,78 @@ class motion extends eqLogic {
 	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//                                                                                                                                               //
+	//                                                                 Gestion des détection                                                             // 
+	//                                                                                                                                               //
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public function SendLastSnap(){
+		$directory=$this->getSnapshotDiretory();
+		$lastFiles = array_slice(array_diff(scandir($directory,1), array('..', '.')),0,1);
+		foreach($lastFiles as $file)
+			$_options['files'][]=$directory.$file;
+		$_options['title'] = '[Jeedom][Motion] Détéction sur la camera '.$this->getHumanName();
+		$_options['message'] = json_encode($Detect);
+		log::add('motion','debug','Envoie d\'un message avec les derniere photo:'.json_encode($_options['files']));
+		$cmds = explode('&&', $this->getConfiguration('alertMessageCommand'));
+		foreach ($cmds as $id) {
+			$cmd = cmd::byId(str_replace('#', '', $id));
+			if (is_object($cmd)) {
+				log::add('motion','debug','Envoie du message avec '.$cmd->getHumanName());
+				$cmd->execute($_options);
+			}
+		}
+	}
+	public function UpdateDetection($Parametres){
+		log::add('motion','debug','Détection sur la camera => '.$this->getName().' => '.$Parametres['state']);
+		$Commande=$this->getCmd('info','detect');
+		if(is_object($Commande))
+		{
+			$Commande->setCollectDate('');
+			$Commande->event($Parametres['state']);
+			$Commande->save();
+		}
+		else
+			log::add('motion','debug','Impossible de trouver la commande');
+
+		/*foreach($this->getCmd('info','maphilight',null,true) as $Commande){
+			if(is_object($Commande))
+			{
+				$IsInArea=maphilightDetect($Parametres['X'],$Parametres['Y'],$Commande->getConfiguration('maphilightArea'));
+				log::add('motion','debug','Derniere image '.$IsInArea);
+				$Commande->setCollectDate('');
+				$Commande->event($IsInArea);
+				$Commande->save();
+			}
+		}*/
+	}
+	public function maphilightDetect($DetectX,$DetectY,$Area){
+		$TopY='';
+		for ($loop=0; $loop>count($Area); $loop=$loop+2)
+		{
+			if ($TopY=='')
+			{
+				if ($DetectX>=$Area[$loop]&& $DetectX<=$Area[$loop+2])
+				{
+					$TopY=$Area[$loop+1];
+				}
+			}
+			else
+			{
+				if ($DetectX<=$Area[$loop]&& $DetectX>=$Area[$loop+2])
+				{	
+					if ($DetectY<=$TopY&& $DetectY>=$Area[$loop+1])
+					{
+						return true;
+					}
+					else
+						$TopY='';
+				}
+			}
+		}
+		if ($TopY=='')
+			return false;
+	}
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//                                                                                                                                               //
 	//                                                                 Gestion des démon                                                             // 
 	//                                                                                                                                               //
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
