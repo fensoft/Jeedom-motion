@@ -1,5 +1,10 @@
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 var areas;
+$("#bt_selectActionMessage").on('click', function () {
+    jeedom.cmd.getSelectModal({cmd: {type: 'action',subType : 'message'}}, function (result) {
+        $(".eqLogicAttr[data-l2key=alertMessageCommand]").atCaret('insert',result.human);
+    });
+});
 $('body').on('change',"input[type='range']",function() {
 	var el = $(this);
 	var width = el.width();
