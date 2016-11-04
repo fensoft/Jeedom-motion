@@ -437,7 +437,11 @@ class motion extends eqLogic {
 			log::add('motion','debug','l\'URL de la Camera n\'existe pas : '.$url);
 			return 'plugins/motion/core/template/icones/no-image-blanc.png';
 		}
-		if($f=@fopen($url,"r")){
+		if(!$f=@fopen($url,"r")){		
+			log::add('motion','debug','Impossible d\'ouvrir l\'URL de la Camera : '.$url);
+  			return 'plugins/motion/core/template/icones/no-image-blanc.png';		  			return 'plugins/motion/core/template/icones/no-image-blanc.png';
+  		}		  		}
+ -		else {
 			//**** URL OK
 			$data=null;
 			while (substr_count($data,"--myboundary") != 2) 
@@ -469,8 +473,6 @@ class motion extends eqLogic {
 			$url.=$directory . $output_file;
 			return 'core/php/downloadFile.php?pathfile=' . urlencode($url);
 		}
-		log::add('motion','debug','Impossible d\'ouvrir l\'URL de la Camera : '.$url);
-		return 'plugins/motion/core/template/icones/no-image-blanc.png';
 	}	
 	public static function CleanFolder($CameraId) {
 		$Camera=eqLogic::byId($CameraId);
