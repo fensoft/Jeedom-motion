@@ -433,9 +433,12 @@ class motion extends eqLogic {
 	public function getSnapshot() {
 		$directory=$this->getSnapshotDiretory();
 		$url=$this->getUrl();
-		if (!self::url_exists($url))
+		if (!self::url_exists($url)){
+			log::add('motion','debug','Le flux video n\'eixte pas'.$url);
 			return 'plugins/motion/core/template/icones/no-image-blanc.png';
+		}
 		if(!$f=@fopen($url,"r")){
+			log::add('motion','debug','Impossible d\'ouvrir le flux video '.$url);
 			return 'plugins/motion/core/template/icones/no-image-blanc.png';
 		}
 		else {
