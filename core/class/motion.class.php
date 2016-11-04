@@ -437,17 +437,15 @@ class motion extends eqLogic {
 			log::add('motion','debug','Le flux video n\'eixte pas'.$url);
 			return 'plugins/motion/core/template/icones/no-image-blanc.png';
 		}
-		if(!$f=@fopen($url,"r")){
+		if(!$ReadFlux=@fopen($url,"r")){
 			log::add('motion','debug','Impossible d\'ouvrir le flux video '.$url);
 			return 'plugins/motion/core/template/icones/no-image-blanc.png';
-		}
-		else {
+		}else {
 			//**** URL OK
 			$data=null;
 			while (substr_count($data,"Content-Length") != 2) 
-				$data.=fread($f,1024);
-			
-			fclose($f);
+				$data.=fread($ReadFlux,1024);
+			fclose($ReadFlux);
 			$data=substr($data,strpos($data,"\r\n\r\n")+4);
 			$data=trim(substr($data,0,stripos($data,"--myboundary")-2));
 			$output_file = $this->getName();
