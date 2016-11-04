@@ -311,6 +311,7 @@ class motion extends eqLogic {
 			}
 			foreach($Camera->getConfiguration() as $key => $value)	{
 				switch($key){
+					case 'alertMessageCommand':
 					case 'createtime':
 					case 'updatetime':
 					case 'plugin':
@@ -501,24 +502,27 @@ class motion extends eqLogic {
 	//                                                                                                                                               //
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public function SendLastSnap(){
-		$directory=$this->getSnapshotDiretory();
-		$lastFiles = array_slice(array_diff(scandir($directory,1), array('..', '.')),0,1);
-		foreach($lastFiles as $file)
-			$_options['files'][]=$directory.$file;
-		$_options['title'] = '[Jeedom][Motion] Détéction sur la camera '.$this->getHumanName();
-		$_options['message'] = json_encode($Detect);
-		log::add('motion','debug','Envoie d\'un message avec les derniere photo:'.json_encode($_options['files']));
-		$cmds = explode('&&', $this->getConfiguration('alertMessageCommand'));
-		foreach ($cmds as $id) {
-			$cmd = cmd::byId(str_replace('#', '', $id));
-			if (is_object($cmd)) {
-				log::add('motion','debug','Envoie du message avec '.$cmd->getHumanName());
-				$cmd->execute($_options);
+		if($this->getConfiguration('alertMessageCommand')!=''){
+			$directory=$this->getSnapshotDiretory();
+			$lastFiles = array_slice(array_diff(scandir($directory,1), array('..', '.')),0,1);
+			foreach($lastFiles as $file)
+				$_options['files'][]=$directory.$file;
+			$_options['title'] = '[Jeedom][Motion] Détéction sur la camera '.$this->getHumanName();
+			$_options['message'] = json_encode($Detect);
+			log::add('motion','debug','Envoie d\'un message avec les derniere photo:'.json_encode($_options['files']));
+			$cmds = explode('&&', $this->getConfiguration('alertMessageCommand'));
+			foreach ($cmds as $id) {
+				$cmd = cmd::byId(str_replace('#', '', $id));
+				if (is_object($cmd)) {
+					log::add('motion','debug','Envoie du message avec '.$cmd->getHumanName());
+					$cmd->execute($_options);
+				}
 			}
 		}
 	}
 	public function UpdateDetection($Parametres){
 		log::add('motion','debug','Détection sur la camera => '.$this->getName().' => '.$Parametres['state']);
+		$this->SendLastSnap();
 		$Commande=$this->getCmd('info','detect');
 		if(is_object($Commande))
 		{
@@ -709,5 +713,4 @@ class motionCmd extends cmd {
 	return $return;
 	}
 }
-
 ?>
