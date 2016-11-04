@@ -510,7 +510,7 @@ class motion extends eqLogic {
 			foreach($lastFiles as $file)
 				$_options['files'][]=$directory.$file;
 			$_options['title'] = '[Jeedom][Motion] Détéction sur la camera '.$this->getHumanName();
-			$_options['message'] = json_encode($Detect);
+			$_options['message'] = 'La camera '.$this->getHumanName(). ' a détécté un mouvement. Voici le snapshot qui a ete pris';
 			log::add('motion','debug','Envoie d\'un message avec les derniere photo:'.json_encode($_options['files']));
 			$cmds = explode('&&', $this->getConfiguration('alertMessageCommand'));
 			foreach ($cmds as $id) {
