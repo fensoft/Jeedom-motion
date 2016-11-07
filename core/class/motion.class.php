@@ -443,11 +443,12 @@ class motion extends eqLogic {
 		}else {
 			//**** URL OK
 			$data=null;
-			while (substr_count($data,"Content-Length") != 2) 
+			//while (substr_count($data,"Content-Length") != 2) 
+			while (substr_count($data,"--myboundary") != 2) 
 				$data.=fread($ReadFlux,1024);
 			fclose($ReadFlux);
-			$data=substr($data,strpos($data,"\r\n\r\n")+4);
-			$data=trim(substr($data,0,stripos($data,"--myboundary")-2));
+			//$data=substr($data,strpos($data,"\r\n\r\n")+4);
+			//$data=trim(substr($data,0,stripos($data,"--myboundary")-2));
 			$output_file = $this->getName();
 			$output_file = htmlentities($output_file, ENT_NOQUOTES, 'utf-8');
 			$output_file = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $output_file);
@@ -475,7 +476,7 @@ class motion extends eqLogic {
 	public static function CleanFolder($CameraId) {
 		$Camera=eqLogic::byId($CameraId);
 		if(is_object($Camera)){
-			$directory=$Camera->getSnapshotDiretory();
+			$directory=$Camera->getSnapshotDiretory(true);
 			if(!file_exists($directory)){
 				exec('sudo mkdir -p '.$directory);
 				exec('sudo chmod 777 -R '.$directory);
