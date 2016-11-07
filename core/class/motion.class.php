@@ -443,8 +443,7 @@ class motion extends eqLogic {
 		}else {
 			//**** URL OK
 			$data=null;
-			//while (substr_count($data,"Content-Length") != 2) 
-			while (substr_count($data,"--myboundary") != 2) 
+			while (substr_count($data,"Content-Length") != 2) 
 				$data.=fread($ReadFlux,1024);
 			fclose($ReadFlux);
 			//$data=substr($data,strpos($data,"\r\n\r\n")+4);
@@ -506,6 +505,7 @@ class motion extends eqLogic {
 		if($this->getConfiguration('alertMessageCommand')!=''){
 			$directory=$this->getSnapshotDiretory();
 			$lastFiles = array_slice(array_diff(scandir($directory,1), array('..', '.')),0,1);
+			$_options['files']=null;
 			foreach($lastFiles as $file)
 				$_options['files'][]=$directory.$file;
 			$_options['title'] = '[Jeedom][Motion] Détéction sur la camera '.$this->getHumanName();
