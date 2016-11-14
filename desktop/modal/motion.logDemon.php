@@ -4,10 +4,10 @@ if (!isConnect()) {
 }
 
 ?>
-<div class="btn btn-danger LogAction" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</div>
+<!--div class="btn btn-danger LogAction" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</div-->
 <div class='Log'></div>
 <script>
-getAlprdLog();
+getLog();
 $('.LogAction[data-action=remove]').on('click', function() {
 	$.ajax({
 		type: "POST",
@@ -26,11 +26,11 @@ $('.LogAction[data-action=remove]').on('click', function() {
 				return;
 			}
 			$('#div_alert').showAlert({message: data.result, level: 'success'});
-			getAlprdLog();
+			getLog();
 		}
 	});	
 });
-function getAlprdLog(){
+function getLog(){
 	$.ajax({
 		type: "POST",
 		timeout:8000, 
